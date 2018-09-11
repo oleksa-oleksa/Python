@@ -27,15 +27,9 @@ def test():
     # should check that when fk plays fh, fk 
     # is the winner. The second should confirm that
     # fh playing against fh returns fh.
-
-def test_fk_fh():
-    fk = "9D 9H 9S 9C 7D".split() 
-    fh = "TD TC TH 7C 7D".split()
     assert poker([fk, fh]) == fk
-    
-def test_fh_fh():
-    fk = "9D 9H 9S 9C 7D".split() 
-    fh = "TD TC TH 7C 7D".split()
     assert poker([fh, fh]) == fh
+    assert poler([sf]) == sf
+    assert poker([sf], 99*[fh]) == sf
         
 print test()

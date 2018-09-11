@@ -29,7 +29,17 @@ def test():
     # fh playing against fh returns fh.
     assert poker([fk, fh]) == fk
     assert poker([fh, fh]) == fh
+
+    # Add 2 new assert statements here. The first 
+    # should assert that when poker is called with a
+    # single hand, it returns that hand. The second 
+    # should check for the case of 100 hands.
     assert poler([sf]) == sf
-    assert poker([sf], 99*[fh]) == sf
+    assert poker([sf] + 99*[fh]) == sf
+
+    # add 3 new assert statements here.
+    assert hand_rank(sf) == (8, 10)
+    assert hand_rank(fk) == (7, 9, 7)
+    assert hand_rank(fh) == (6, 10, 7)
         
 print test()

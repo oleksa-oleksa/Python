@@ -12,8 +12,51 @@ def poker(hands):
     "Return the best hand: poker([hand,...]) => hand"
     return max(hands, key = hand_rank)
 
+
+# Modify the hand_rank function so that it returns the
+# correct output for the remaining hand types, which are:
+# full house, flush, straight, three of a kind, two pair,
+# pair, and high card hands. 
+# 
+# Do this by completing each return statement below.
+#
+# You may assume the following behavior of each function:
+#
+# straight(ranks): returns True if the hand is a straight.
+# flush(hand):     returns True if the hand is a flush.
+# kind(n, ranks):  returns the first rank that the hand has
+#                  exactly n of. For A hand with 4 sevens 
+#                  this function would return 7.
+# two_pair(ranks): if there is a two pair, this function 
+#                  returns their corresponding ranks as a 
+#                  tuple. For example, a hand with 2 twos
+#                  and 2 fours would cause this function
+#                  to return (4, 2).
+# card_ranks(hand) returns an ORDERED tuple of the ranks 
+#                  in a hand (where the order goes from
+#                  highest to lowest rank). 
+#
+
 def hand_rank(hand):
-    return None # we will be changing this later.
+    ranks = card_ranks(hand)
+    if straight(ranks) and flush(hand):            # straight flush
+        return (8, max(ranks))
+    elif kind(4, ranks):                           # 4 of a kind
+        return (7, kind(4, ranks), kind(1, ranks))
+    elif kind(3, ranks) and kind(2, ranks):        # full house
+        return # your code here
+    elif flush(hand):                              # flush
+        return # your code here
+    elif straight(ranks):                          # straight
+        return # your code here
+    elif kind(3, ranks):                           # 3 of a kind
+        return # your code here
+    elif two_pair(ranks):                          # 2 pair
+        return # your code here
+    elif kind(2, ranks):                           # kind
+        return # your code here
+    else:                                          # high card
+        return # your code here
 
 
 def test():

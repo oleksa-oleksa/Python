@@ -12,6 +12,18 @@ def poker(hands):
     "Return the best hand: poker([hand,...]) => hand"
     return max(hands, key = hand_rank)
 
+# Modify the card_ranks() function so that cards with
+# rank of ten, jack, queen, king, or ace (T, J, Q, K, A)
+# are handled correctly. Do this by mapping 'T' to 10, 
+# 'J' to 11, etc...
+def card_ranks(cards):
+    "Return a list of the ranks, sorted with higher first."
+    ranks = [r for r,s in cards]
+    ranks.sort(reverse=True)
+    return ranks
+
+print card_ranks(['AC', '3D', '4S', 'KH']) #should output [14, 13, 4, 3]
+
 
 # Modify the hand_rank function so that it returns the
 # correct output for the remaining hand types, which are:
@@ -46,15 +58,15 @@ def hand_rank(hand):
     elif kind(3, ranks) and kind(2, ranks):        # full house
         return (6, kind(3, ranks), kind(2, ranks))
     elif flush(hand):                              # flush
-        return (5, card_ranks(hand))
+        return (5, ranks)
     elif straight(ranks):                          # straight
-        return (4, card_ranks(hand))
+        return (4, max(ranks))
     elif kind(3, ranks):                           # 3 of a kind
-        return (3, kind(3, ranks), card_ranks(hand))
+        return (3, kind(3, ranks), ranks)
     elif two_pair(ranks):                          # 2 pair
-        return (2, two_pair(ranks), card_ranks(hand))
+        return (2, two_pair(ranks), ranks)
     elif kind(2, ranks):                           # kind
-        return (1, kind(2, ranks), card_ranks(hand))
+        return (1, kind(2, ranks), ranks)
     else:                                          # high card
         return (0, card_ranks(hand))
 
@@ -64,8 +76,16 @@ def test():
     sf = "6C 7C 8C 9C TC".split() # => ['6C', '7C', '8C', '9C', 'TC']
     fk = "9D 9H 9S 9C 7D".split() 
     fh = "TD TC TH 7C 7D".split()
-    assert poker([sf, fk, fh]) == sf
-    
+    # Modify the test() function to include three new test cases.
+    # These should assert that card_ranks gives the appropriate
+    # output for the given straight flush, four of a kind, and
+    # full house.
+    #
+    # For example, calling card_ranks on sf should output  
+    # [10, 9, 8, 7, 6]
+    assert card_ranks(sf) == [10, 9, 8, 7, 6]
+    assert card_ranks(fk) == [9, 9, 9, 9, 7]
+    assert card_ranks(fh) == [10, 10, 10, 7, 7]    
     # Add 2 new assert statements here. The first 
     # should check that when fk plays fh, fk 
     # is the winner. The second should confirm that

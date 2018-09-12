@@ -12,6 +12,39 @@ def poker(hands):
     "Return the best hand: poker([hand,...]) => hand"
     return max(hands, key = hand_rank)
 
+ # First the described behavior of each function was assumed
+# and later the functions were implemented
+
+def straight(ranks):
+    "Returns True if the ordered ranks form a 5-card straight"
+    return (max(ranks) - min(ranks) == 4) and len(set(ranks)) == 5
+
+def flush(hand):
+    "Returns True if all the cards have the same suit"
+    suits = [s for r,s in hand]
+    return len(set(suits)) == 1
+
+
+def kind(n, ranks):
+    """
+    Return the first rank that this hand has exactly n of.
+    Return None if there is no n-of-a-kind in the hand.
+    """
+    for r in ranks:
+        if ranks.count(r) == n: return r
+    return None
+
+def two_pair(ranks):
+    """If there are two pair, return the two ranks as a
+    tuple: (highest, lowest); otherwise return None."""
+    pair = kind(2, ranks)
+    lowpair = kind(2, list(reversed(ranks)))
+
+    if pair and lowpair != pair:
+        return (pair, lowpair)
+    else:
+        return None
+
 # Modify the card_ranks() function so that cards with
 # rank of ten, jack, queen, king, or ace (T, J, Q, K, A)
 # are handled correctly. Do this by mapping 'T' to 10, 
@@ -22,43 +55,10 @@ def card_ranks(hand):
     ranks.sort(reverse=True)
     return ranks
 
-print card_ranks(['AC', '3D', '4S', 'KH']) #should output [14, 13, 4, 3]
-
-
-
 # Modify the hand_rank function so that it returns the
 # correct output for the remaining hand types, which are:
 # full house, flush, straight, three of a kind, two pair,
 # pair, and high card hands. 
-# 
-# Do this by completing each return statement below.
-#
-# You may assume the following behavior of each function:
-#
-# straight(ranks): returns True if the hand is a straight.
-def straight(ranks):
-    "Returns True if the ordered ranks form a 5-card straight"
-    return (max(ranks) - min(ranks) == 4) and len(set(ranks))
-
-# flush(hand):     returns True if the hand is a flush.
-def flush(hand):
-    "Returns True if all the cards have the same suit"
-    suits = [s for r,s in hand]
-    return len(set(suits)) == 1
-
-# kind(n, ranks):  returns the first rank that the hand has
-#                  exactly n of. For A hand with 4 sevens 
-#                  this function would return 7.
-# two_pair(ranks): if there is a two pair, this function 
-#                  returns their corresponding ranks as a 
-#                  tuple. For example, a hand with 2 twos
-#                  and 2 fours would cause this function
-#                  to return (4, 2).
-# card_ranks(hand) returns an ORDERED tuple of the ranks 
-#                  in a hand (where the order goes from
-#                  highest to lowest rank). 
-#
-
 def hand_rank(hand):
     ranks = card_ranks(hand)
     if straight(ranks) and flush(hand):            # straight flush
@@ -125,12 +125,14 @@ def test():
     # should assert that when poker is called with a
     # single hand, it returns that hand. The second 
     # should check for the case of 100 hands.
-    assert poler([sf]) == sf
+    assert poker([sf]) == sf
     assert poker([sf] + 99*[fh]) == sf
 
     # add 3 new assert statements here.
     assert hand_rank(sf) == (8, 10)
     assert hand_rank(fk) == (7, 9, 7)
     assert hand_rank(fh) == (6, 10, 7)
+
+    return "tests pass"
         
-print test()
+print (test())

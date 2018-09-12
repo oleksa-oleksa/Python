@@ -16,13 +16,14 @@ def poker(hands):
 # rank of ten, jack, queen, king, or ace (T, J, Q, K, A)
 # are handled correctly. Do this by mapping 'T' to 10, 
 # 'J' to 11, etc...
-def card_ranks(cards):
+def card_ranks(hand):
     "Return a list of the ranks, sorted with higher first."
-    ranks = [r for r,s in cards]
+    ranks = ['--23456789TJQKA'.index(r) for r,s in hand]
     ranks.sort(reverse=True)
     return ranks
 
 print card_ranks(['AC', '3D', '4S', 'KH']) #should output [14, 13, 4, 3]
+
 
 
 # Modify the hand_rank function so that it returns the
@@ -35,7 +36,16 @@ print card_ranks(['AC', '3D', '4S', 'KH']) #should output [14, 13, 4, 3]
 # You may assume the following behavior of each function:
 #
 # straight(ranks): returns True if the hand is a straight.
+def straight(ranks):
+    "Returns True if the ordered ranks form a 5-card straight"
+    return (max(ranks) - min(ranks) == 4) and len(set(ranks))
+
 # flush(hand):     returns True if the hand is a flush.
+def flush(hand):
+    "Returns True if all the cards have the same suit"
+    suits = [s for r,s in hand]
+    return len(set(suits)) == 1
+
 # kind(n, ranks):  returns the first rank that the hand has
 #                  exactly n of. For A hand with 4 sevens 
 #                  this function would return 7.
@@ -76,6 +86,24 @@ def test():
     sf = "6C 7C 8C 9C TC".split() # => ['6C', '7C', '8C', '9C', 'TC']
     fk = "9D 9H 9S 9C 7D".split() 
     fh = "TD TC TH 7C 7D".split()
+    tp = "5S 5D 9H 9C 6S".split()
+    fk_ranks = card_ranks(fk) # [9, 9, 9, 9, 7]
+    fp_ranks = card_ranks(tp) # [9, 9, 6, 5, 5]
+
+    assert straight([9, 8, 7, 6, 5]) == True
+    assert straight([9, 7, 6, 5, 2]) == False
+
+    assert flush(sf) == True
+    assert flush(fk) == False
+
+    assert kind(4, fk_ranks) == 9
+    assert kind(3, fk_ranks) == None
+    assert kind(2, fk_ranks) == None
+    assert kind(1, fk_ranks) == 7
+
+    assert two_pair(fk_ranks) == None
+    assert two_pair(fp_ranks) == (9, 5)
+
     # Modify the test() function to include three new test cases.
     # These should assert that card_ranks gives the appropriate
     # output for the given straight flush, four of a kind, and

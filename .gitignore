@@ -5,3 +5,5 @@ Add-Ons
 **/*.png
 **/*.gif
 **/*.m~
+venv
+.idea

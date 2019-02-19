@@ -1,3 +1,4 @@
+# lesson 2 Udacity
 import os
 
 def rename_files():

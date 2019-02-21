@@ -1,6 +1,14 @@
 import turtle
 
-def draw_square():
+def draw_square(turtle):
+
+    # Draw 4 sides of a square
+    for side in range(4):
+        turtle.forward(100)
+        turtle.right(90)
+
+
+def draw_art():
     window = turtle.Screen()
     window.bgcolor("red")
 
@@ -9,12 +17,9 @@ def draw_square():
     brad.color("yellow")
     brad.speed(2)
 
-    # Draw 4 sides of a square
-    for side in range(4):
-        brad.forward(100)
-        brad.right(90)
+    draw_square(brad)
 
     window.exitonclick()
 
 
-draw_square()
+draw_art()

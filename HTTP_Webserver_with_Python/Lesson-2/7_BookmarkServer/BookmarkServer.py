@@ -74,8 +74,11 @@ def CheckURI(uri, timeout=5):
     False if that GET request returns any other response, or doesn't return
     (i.e. times out).
     '''
-    # 1. Write this function.  Delete the following line.
-    raise NotImplementedError("Step 1 isn't written yet.")
+    try:
+        r = requests.get(uri, timeout=timeout)
+        return r.status_code == 200
+    except requests.RequestException:
+        return False
 
 
 class Shortener(http.server.BaseHTTPRequestHandler):
@@ -87,6 +90,8 @@ class Shortener(http.server.BaseHTTPRequestHandler):
         if name:
             if name in memory:
                 # 2. Send a 303 redirect to the long URI in memory[name].
+                self.send_response(303)
+                self.send_header('Location', memory.get('name', '/'))
                 #    Delete the following line.
                 raise NotImplementedError("Step 2 isn't written yet.")
             else:

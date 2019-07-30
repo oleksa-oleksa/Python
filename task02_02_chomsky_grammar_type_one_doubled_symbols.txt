@@ -1,0 +1,37 @@
+Oleksandra Baga
+
+======================
+
+Given in the task:
+
+Type 1 grammar for the language DOUBLE
+
+Develop (with paper and pencil) a Type 1 grammar (i.e., a context-sensitive grammar) for the DOUBLE language. Each word in this language consists of two equal (non-empty) strings separated by a delimiter and enclosed in brackets (and). The strings should consist only of the letters a and b.
+
+Examples: The language DOUBLE should include the following six words:
+(abaab:abaab) 
+(a:a)
+(b:b)
+(aaaaa:aaaaa)
+(abababababab:abababababab)
+
+======================
+
+Solution:
+
+R01:      S       : a A 
+R02:      S       : b B 
+R03:      a A     : a C ":" C a
+R04:      b B     : b D ":" D b
+R05:      a C     : a E
+R06:      C a     : E a
+R07:      b D     : b F
+R08:      D b     : F b
+R09:      E       : K
+R10:      D       : M
+R11:      K       : a S
+R12:      K       : b S
+R13:      K       : Epsilon
+R14:      M       : b S
+R15:      M       : a S
+R16:      M       : Epsilon

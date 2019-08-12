@@ -22,7 +22,7 @@ plt.yticks(rotation=0)
 plt.xticks(rotation=90)
 plt.show()
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.33, random_state=5)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.35, random_state=10)
 print(x_train.shape, y_train.shape)
 print(x_test.shape, y_test.shape)
 
@@ -42,8 +42,8 @@ print("Mean squared error: %.2f"
 print('Variance score: %.2f' % r2_score(y_test, y_pred))
 
 # compare prediction with test data
-fig, ax = plt.subplots(figsize=(4, 4))
-sns.lineplot(x_test, y_test, color='r')
-sns.lineplot(x_test, y_pred, color='g')
-ax.legend(['test', 'prediction'], facecolor='w')
+fig, ax = plt.subplots()
+ax2 = ax.twinx()
+sns.lineplot(data=y_test, color='r')
+sns.lineplot(data=y_pred, color='b', ax=ax2)
 plt.show()

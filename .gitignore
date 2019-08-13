@@ -6,4 +6,6 @@ img
 *.jpg
 *.png
 .idea
-
+settings.py
+urls.py
+wsgi.py

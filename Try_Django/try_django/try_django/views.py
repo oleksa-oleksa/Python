@@ -2,4 +2,7 @@
 # Whatever we want to change a page we start with a view
 from django.http import HttpResponse
 
-def home_page
+def home_page():
+    return HttpResponse("<h1>Hello!</h1>")
+
+

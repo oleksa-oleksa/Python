@@ -2,6 +2,7 @@
 # Whatever we want to change a page we start with a view
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.template.loader import get_template
 
 def home_page(request):
     title = "Oleksandra Baga"
@@ -12,7 +13,12 @@ def home_page(request):
 
 
 def about_page(request):
-    return render(request, "index.html", {"title": "I am a student and I live in Berlin"})
+    content = {"title" : "About page"}
+    template_name = "about.html"
+    template_obj = get_template(template_name)
+    rendered_item = template_obj.render(content)
+
+    return HttpResponse(rendered_item)
 
 
 def contact_page(request):

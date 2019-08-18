@@ -5,11 +5,15 @@ from django.shortcuts import render
 from django.template.loader import get_template
 
 def home_page(request):
-    title = "Oleksandra Baga"
+    title = "Hello "
     #doc = "<h1> Hello {title}</h1".format(title=title)
     # two curly brackets for django rendered document
     #django_rendered_doc = "<h1> Hello {{title}}</h1".format(title=title)
-    return render(request, "index.html", {"title": title, "my_list": [1, 2, 3]})
+
+    context = {"title": title}
+    if request.user.is_athenticated:
+        context = {"title": title, "my_list": [1, 2, 3]}
+    return render(request, "index.html", context)
 
 
 def about_page(request):

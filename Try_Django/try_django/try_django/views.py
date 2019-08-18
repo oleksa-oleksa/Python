@@ -10,8 +10,8 @@ def home_page(request):
     # two curly brackets for django rendered document
     #django_rendered_doc = "<h1> Hello {{title}}</h1".format(title=title)
 
-    context = {"title": title}
-    if request.user.is_athenticated:
+    context = {"title": "Who are you?.."}
+    if request.user.is_authenticated:
         context = {"title": title, "my_list": [1, 2, 3]}
     return render(request, "index.html", context)
 

@@ -9,7 +9,8 @@ def home_page(request):
     #doc = "<h1> Hello {title}</h1".format(title=title)
     # two curly brackets for django rendered document
     #django_rendered_doc = "<h1> Hello {{title}}</h1".format(title=title)
-    return render(request, "index.html", {"title": title})
+    my_list = [1, 2, 3]
+    return render(request, "index.html", {"title": title, "list": my_list})
 
 
 def about_page(request):

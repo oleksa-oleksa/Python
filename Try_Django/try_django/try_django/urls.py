@@ -28,8 +28,9 @@ from .views import (
 
 urlpatterns = [
     path('', home_page),
-    re_path(r'about/$', about_page),
-    path('blog/', blog_post_detail_page),
+    re_path(r'^about/$', about_page),
+    path('blog/<int:post_id>', blog_post_detail_page),
+    re_path(r'^blog/(?P<post_id>\d+)$', blog_post_detail_page),
     path('contact/', contact_page),
     path('admin/', admin.site.urls),
 ]

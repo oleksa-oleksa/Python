@@ -7,7 +7,6 @@ img
 *.png
 .idea
 settings.py
-urls.py
 wsgi.py
 __init__.py
 migrations

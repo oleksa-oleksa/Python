@@ -30,7 +30,7 @@ urlpatterns = [
     path('', home_page),
     re_path(r'^about/$', about_page),
     path('blog/<str:slug>', blog_post_detail_page),
-    re_path(r'^blog/(?P<slug>\d+)$', blog_post_detail_page),
+    re_path(r'^blog/(?P<slug>\w+)$', blog_post_detail_page),
     path('contact/', contact_page),
     path('admin/', admin.site.urls),
 ]

@@ -21,8 +21,9 @@ def blog_post_detail_page(request, slug):
 
 def blog_post_list_view(request):
     # list put objects, could be search
+    qs = BlogPost.objects.all()
     template_name = "blog_post_list.html"
-    context = {"object-list": []}
+    context = {"object-list": qs}
     return render(request, template_name, context)
 
 
@@ -41,14 +42,14 @@ def blog_post_detail_view(request, slug):
     return render(request, template_name, context)
 
 
-def blog_post_update_view(request):
+def blog_post_update_view(request, slug):
     obj = get_object_or_404(BlogPost, slug=slug)
     template_name = "blog_post_update.html"
     context = {"object": obj, "form": None}
     return render(request, template_name, context)
 
 
-def blog_post_delete_view(request):
+def blog_post_delete_view(request, slug):
     obj = get_object_or_404(BlogPost, slug=slug)
     template_name = "blog_post_delete.html"
     context = {"object": obj}

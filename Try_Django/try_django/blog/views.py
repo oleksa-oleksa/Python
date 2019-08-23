@@ -23,7 +23,7 @@ def blog_post_list_view(request):
     # list put objects, could be search
     qs = BlogPost.objects.all()
     template_name = "blog_post_list.html"
-    context = {"object-list": qs}
+    context = {"object_list": qs}
     return render(request, template_name, context)
 
 

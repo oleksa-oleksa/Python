@@ -17,8 +17,7 @@ from django.contrib import admin
 from django.urls import path, re_path, include
 
 from blog.views import (
-    blog_post_detail_page,
-    blog_post_list_view
+    blog_post_create_view
 )
 
 from .views import (
@@ -30,9 +29,8 @@ from .views import (
 urlpatterns = [
     path('', home_page),
     re_path(r'^about/$', about_page),
-    path('blog/', blog_post_list_view),
-    path('blog/<str:slug>/', blog_post_detail_page),
-    re_path(r'^blog/(?P<slug>\w+)$', blog_post_detail_page),
+    path('blog-new/', blog_post_create_view),
+    path('blog/', include('blog.urls')),
     path('contact/', contact_page),
     path('admin/', admin.site.urls),
 ]

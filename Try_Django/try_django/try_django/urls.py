@@ -17,8 +17,9 @@ from django.contrib import admin
 from django.urls import path, re_path, include
 
 from blog.views import (
-    blog_post_create_view
+    blog_post_create_view,
 )
+
 
 from .views import (
     home_page,
@@ -32,5 +33,5 @@ urlpatterns = [
     path('blog-new/', blog_post_create_view),
     path('blog/', include('blog.urls')),
     path('contact/', contact_page),
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls)
 ]

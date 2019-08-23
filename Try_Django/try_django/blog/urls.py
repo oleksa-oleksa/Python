@@ -18,9 +18,9 @@ from django.urls import path
 
 
 from .views import (
-    blog_post_detail_page,
     blog_post_list_view,
-    blog_post_detail_view
+    blog_post_detail_view,
+    blog_post_create_view
 )
 
 urlpatterns = [

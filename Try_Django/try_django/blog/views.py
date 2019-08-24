@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from .models import BlogPost
+from .forms import BlogPostForm
 
 # GET -> 1 object
 # filter -> list of objects
@@ -18,7 +19,10 @@ def blog_post_list_view(request):
 
 def blog_post_create_view(request):
     # create objects -> use a form
-    template_name = "blog/create.html"
+    form = BlogPostForm(request.POST or None)
+    if form.is_valid():
+        print(form.cleaned_data)
+    template_name = "form.html"
     context = {"form": None}
     return render(request, template_name, context)
 

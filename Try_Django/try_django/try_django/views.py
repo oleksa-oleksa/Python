@@ -4,11 +4,14 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.template.loader import get_template
 
+from .forms import ContactForm
+
+
 def home_page(request):
     title = "Hello "
-    #doc = "<h1> Hello {title}</h1".format(title=title)
+    # doc = "<h1> Hello {title}</h1".format(title=title)
     # two curly brackets for django rendered document
-    #django_rendered_doc = "<h1> Hello {{title}}</h1".format(title=title)
+    # django_rendered_doc = "<h1> Hello {{title}}</h1".format(title=title)
 
     context = {"title": "Who are you?.."}
     if request.user.is_authenticated:
@@ -26,7 +29,12 @@ def about_page(request):
 
 
 def contact_page(request):
-    print(request.POST)
+    form = ContactForm(request.POST or None)
+    if form.is_valid():
+        print(form.cleaned_data)
+    else:
+        print("Invalid case")
+        print(form.cleaned_data)
     return render(request, "form.html", {"title": "Contact us"})
 
 

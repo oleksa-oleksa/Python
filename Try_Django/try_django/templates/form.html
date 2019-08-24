@@ -7,9 +7,7 @@
 {% block content %}
 
 <form method='POST' action='.'> {% csrf_token %}
-    <input type="text" name="full name">
-    <input type="email" name="email">
-    <textarea name="content"></textarea>
+    {{ form.as_p }} <!--- will render wrapped in <p> tags -->
     <button type="submit">Send</button>
 </form>
 

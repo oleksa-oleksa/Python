@@ -26,7 +26,8 @@ def about_page(request):
 
 
 def contact_page(request):
-    return render(request, "index.html", {"title": "Don't hesitate to contact me!"})
+    print(request.POST)
+    return render(request, "form.html", {"title": "Contact us"})
 
 
 

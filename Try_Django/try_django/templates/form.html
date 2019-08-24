@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% if title %}
+    <h1>{{ title }}</h1>
+{% endif %}
+
+{% block content %}
+
+<form method='POST' action='.'> {% csrf_token %}
+    <input type="text" name="full name">
+    <input type="email" name="email">
+    <textarea name="content"></textarea>
+    <button type="submit">Send</button>
+</form>
+
+{% endblock %}

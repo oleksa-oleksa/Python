@@ -21,9 +21,10 @@ def blog_post_create_view(request):
     # create objects -> use a form
     form = BlogPostForm(request.POST or None)
     if form.is_valid():
-        print(form.cleaned_data)
-    template_name = "form.html"
-    context = {"form": None}
+        obj = BlogPost.objects.create(**form.cleaned_data)
+        form = BlogPostForm()
+    template_name = "blog/form.html"
+    context = {"form": form}
     return render(request, template_name, context)
 
 

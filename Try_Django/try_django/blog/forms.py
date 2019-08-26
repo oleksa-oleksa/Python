@@ -14,3 +14,11 @@ class BlogPostModelForm(forms.ModelForm):
     class Meta:
         model = BlogPost
         fields = ["title", "slug", "content"]
+
+    def clean_title(self, *args, **kwargs):
+        instance = self.instance
+        title = self.cleaned_data.get('title')
+        qs = BlogPost.objects.filter(title=title)
+        if qs.exists():
+            raise forms.ValidationError("This title has already been used. Please try again.")
+        return title

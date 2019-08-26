@@ -5,7 +5,7 @@ User = settings.AUTH_USER_MODEL
 
 
 # Create your models here.
-class BlogPost(models.Model):
+class BlogPost(models.Model): # blogpost_set -> queryset
     # id = PrimaryKey, Integer
     user = models.ForeignKey(User, default=1, null=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length=150)

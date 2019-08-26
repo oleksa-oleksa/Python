@@ -9,7 +9,7 @@ class BlogPostForm(forms.Form):
 
 
 class BlogPostModelForm(forms.ModelForm):
-    # to change the form instead of model 
+    # to change the form instead of model
     # title = forms.CharField(max_length=150)
     class Meta:
         model = BlogPost

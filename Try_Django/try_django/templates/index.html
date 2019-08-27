@@ -11,7 +11,7 @@ Index Page.
 <h3>{{ user }} is logged: {{ user.is_authenticated }}</h3>
 
 {% for a in blog_list %}
-    {% include 'blog/list-inline.html' with blog_post=a %}
+    {% include 'blog/list-inline.html' with blog_post=a truncate=True detail=False %}
 {% endfor %}
 
 <p>It is an index page. We are trying to do Django Tutorial! </p>

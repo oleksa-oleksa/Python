@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.template.loader import get_template
 
 from .forms import ContactForm
+from blog.models import BlogPost
 
 
 def home_page(request):
@@ -13,6 +14,7 @@ def home_page(request):
     # two curly brackets for django rendered document
     # django_rendered_doc = "<h1> Hello {{title}}</h1".format(title=title)
 
+    qs = BlogPost.objects.all()[:5]
     context = {"title": "Who are you?.."}
     if request.user.is_authenticated:
         context = {"title": title, "my_list": [1, 2, 3]}

@@ -9,15 +9,12 @@ from blog.models import BlogPost
 
 
 def home_page(request):
-    title = "Hello "
     # doc = "<h1> Hello {title}</h1".format(title=title)
     # two curly brackets for django rendered document
     # django_rendered_doc = "<h1> Hello {{title}}</h1".format(title=title)
-
+    title = "Hello there...."
     qs = BlogPost.objects.all()[:5]
-    context = {"title": "Who are you?.."}
-    if request.user.is_authenticated:
-        context = {"title": title, "my_list": [1, 2, 3]}
+    context = {"title": "Welcome to Try Django", 'blog_list': qs}
     return render(request, "index.html", context)
 
 

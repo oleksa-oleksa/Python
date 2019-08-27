@@ -6,14 +6,12 @@ Index Page.
 
 {% block content %}
 
-{{ title }}
+<h1>{{ title }}</h1>
 
-{{ user }}
+<h3>{{ user }} is logged: {{ user.is_authenticated }}</h3>
 
-{{ user.is_authenticated }}
-
-{% for a in my_list %}
-    <li>{{ a }} </li>
+{% for a in blog_list %}
+    {% include 'blog/list-inline.html' with blog_post=a %}
 {% endfor %}
 
 <p>It is an index page. We are trying to do Django Tutorial! </p>

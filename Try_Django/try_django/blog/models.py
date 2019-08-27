@@ -15,6 +15,12 @@ class BlogPost(models.Model): # blogpost_set -> queryset
     timestamp = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
+    '''Any information that is “not a form Field” can be considered as metadata. 
+    Django provides sensible defaults to all fields. But if you want to override 
+    the default behavior of fields, you can define the corresponding meta options. 
+    '''
+    class Meta:
+        ordering = ['publish_date', '-updated_date', '-timestamp']
 
     def get_absolute_url(self):
         return f"/blog/{self.slug}"

@@ -13,6 +13,9 @@ from .forms import BlogPostModelForm
 def blog_post_list_view(request):
     # list put objects, could be search
     qs = BlogPost.objects.all().published()
+    if request.user.is_authenticated:
+        user_qs = BlogPost.objects.filter(user=request.user)
+        qs = (qs | user_qs).distinct()
     template_name = "blog/list.html"
     context = {"object_list": qs}
     return render(request, template_name, context)

@@ -10,3 +10,4 @@ settings.py
 wsgi.py
 __init__.py
 migrations
+static_cdn_test

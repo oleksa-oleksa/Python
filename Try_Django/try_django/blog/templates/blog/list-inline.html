@@ -17,7 +17,7 @@
         </p>
 
         {% if not detail %}
-            {% if not blog_post.publish_date %} Draft {% endif %}
+            {% if not blog_post.publish_date %} No_Date {% endif %}
             <a href="{{ blog_post.get_absolute_url }}">View</a>
         
         {% endif %}

@@ -3,7 +3,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.template.loader import get_template
-from django.utils import timezone
 
 from .forms import ContactForm
 from blog.models import BlogPost
@@ -15,11 +14,7 @@ def home_page(request):
     # django_rendered_doc = "<h1> Hello {{title}}</h1".format(title=title)
     title = "Hello there...."
 
-    # hide posts without date
-    now = timezone.now()
-    qs = BlogPost.objects.filter(publish_date__lte=now)
-
-    # qs = BlogPost.objects.all()[:5]
+    qs = BlogPost.objects.all().published()[:5]
 
     context = {"title": "Welcome to Try Django", 'blog_list': qs}
     return render(request, "index.html", context)

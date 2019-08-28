@@ -1,7 +1,20 @@
 from django.db import models
 from django.conf import settings
+from django.utils import timezone
 
 User = settings.AUTH_USER_MODEL
+
+
+class BlogPostQuerySet(models.QuerySet):
+    def published(self):
+        now = timezone.now()
+        # BlogPost objects
+        return self.filter(publish_date__lte=now)
+
+
+class BlogPostManager(models.Manager):
+    def get_queryset(self):
+        return BlogPostQuerySet(self.model, using=self._db)
 
 
 # Create your models here.
@@ -14,6 +27,8 @@ class BlogPost(models.Model): # blogpost_set -> queryset
     publish_date = models.DateTimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
+
+    objects = BlogPostManager()
 
     '''Any information that is “not a form Field” can be considered as metadata. 
     Django provides sensible defaults to all fields. But if you want to override 

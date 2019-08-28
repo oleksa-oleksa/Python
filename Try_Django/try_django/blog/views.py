@@ -12,7 +12,7 @@ from .forms import BlogPostModelForm
 
 def blog_post_list_view(request):
     # list put objects, could be search
-    qs = BlogPost.objects.all()
+    qs = BlogPost.objects.all().published()
     template_name = "blog/list.html"
     context = {"object_list": qs}
     return render(request, template_name, context)

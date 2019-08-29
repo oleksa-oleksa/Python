@@ -24,7 +24,7 @@ def blog_post_list_view(request):
 @staff_member_required
 def blog_post_create_view(request):
     # create objects -> use a form
-    form = BlogPostModelForm(request.POST or None)
+    form = BlogPostModelForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         # obj = BlogPost.objects.create(**form.cleaned_data)
         obj = form.save(commit=False)

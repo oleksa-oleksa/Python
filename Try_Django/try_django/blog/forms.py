@@ -13,7 +13,7 @@ class BlogPostModelForm(forms.ModelForm):
     # title = forms.CharField(max_length=150)
     class Meta:
         model = BlogPost
-        fields = ["title", "slug", "content"]
+        fields = ["title", "image", "slug", "content"]
 
     def clean_title(self, *args, **kwargs):
         instance = self.instance

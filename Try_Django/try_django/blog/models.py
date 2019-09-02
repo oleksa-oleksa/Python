@@ -16,6 +16,14 @@ class BlogPostManager(models.Manager):
     def get_queryset(self):
         return BlogPostQuerySet(self.model, using=self._db)
 
+    def published(self):
+        return self.get_queryset().published()
+
+    def search(self, query=None):
+        if query is None:
+            return self.get_queryset().none()
+        return self.get_queryset().published().search(query)
+
 
 # Create your models here.
 class BlogPost(models.Model): # blogpost_set -> queryset

@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from django.db.models import Q
 
 User = settings.AUTH_USER_MODEL
 
@@ -10,6 +11,18 @@ class BlogPostQuerySet(models.QuerySet):
         now = timezone.now()
         # BlogPost objects
         return self.filter(publish_date__lte=now)
+
+    def search(self, query):
+        lookup = (
+                Q(title__icontains=query) |
+                Q(content__icontains=query) |
+                Q(slug__icontains=query) |
+                Q(user__first_name__icontains=query) |
+                Q(user__last_name__icontains=query) |
+                Q(user__username__icontains=query)
+        )
+
+        return self.filter(lookup)
 
 
 class BlogPostManager(models.Manager):

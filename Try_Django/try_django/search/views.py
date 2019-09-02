@@ -15,4 +15,4 @@ def search_view(request):
         blog_list = BlogPost.objects.search(query=query)
         context['blog_list'] = blog_list
 
-    return render(request, 'searches/view.html', context)
+    return render(request, 'search/view.html', context)

@@ -22,6 +22,7 @@ def example3(manatees):
         for manatee_property in manatee:
             print(manatee_property, ": ", manatee[manatee_property])
 
+
 # Efficiency is O(n^2)
 def example4(manatees):
     oldest_manatee = "No manatees here!"

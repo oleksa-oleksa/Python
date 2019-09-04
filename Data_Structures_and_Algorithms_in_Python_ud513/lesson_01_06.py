@@ -8,6 +8,9 @@
 
 def show_excitement():
     # Your code goes here!
-    return ""
+    s = "I am super excited for this course!"
+    s_list = []
+    for x in range(5):
+        s_list.append(s)
+    return " ".join(list)
 
-print show_excitement()

@@ -28,9 +28,8 @@ class LinkedList(object):
 
     def insert_first(self, new_element):
         "Insert new element as the head of the LinkedList"
-        next_element = self.head
+        new_element.next = self.head
         self.head = new_element
-        self.head.next = next_element
 
     def delete_first(self):
         if self.head:

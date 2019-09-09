@@ -10,12 +10,24 @@ elements are in a strictly increasing order.
 Return the index of value, or -1 if the value
 doesn't exist in the list."""
 
+
 def binary_search(input_array, value):
     """Your code goes here."""
+    low = 0
+    high = input_array.len() - 1  # index
+
+    while low <= high:
+        middle = (low + high) / 2
+        if input_array[middle] == value:
+            return middle
+        elif input_array[middle] < value:
+            low = middle + 1
+        else:
+            high = middle - 1
     return -1
 
 test_list = [1,3,9,11,15,19,29]
 test_val1 = 25
 test_val2 = 15
-print binary_search(test_list, test_val1)
-print binary_search(test_list, test_val2)
+print(binary_search(test_list, test_val1))
+print(binary_search(test_list, test_val2))

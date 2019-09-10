@@ -13,3 +13,9 @@ def get_fib_loop(position):
         nextt = first + second
         i += 1
     return nextt
+
+
+def get_fib_recursion(position):
+    if position == 0 or position == 1:
+        return position
+    return get_fib_recursion(position - 1) + get_fib_recursion(position - 2)

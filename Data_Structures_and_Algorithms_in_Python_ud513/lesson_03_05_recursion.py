@@ -19,3 +19,4 @@ def get_fib_recursion(position):
     if position == 0 or position == 1:
         return position
     return get_fib_recursion(position - 1) + get_fib_recursion(position - 2)
+

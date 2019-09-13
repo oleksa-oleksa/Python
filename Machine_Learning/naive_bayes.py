@@ -16,7 +16,24 @@ P_Sara_love = 0.5
 P_Sara_life = 0.3
 P_Sara_deal = 0.2
 
+# Whom belongs "life deal" to?
+print("Whom belongs love deal to?")
+P_Chris_prior = P_Chris * P_Chris_life * P_Chris_deal
+P_Sara_prior = P_Sara * P_Sara_life * P_Sara_deal
+print("This is Chris: ", P_Chris_prior)
+print("This is Sara:", P_Sara_prior)
+
+print("Chris!") if P_Chris_prior > P_Sara_prior else print("Sara")
+
+P_Chris_life_deal_posterior = P_Chris_prior / (P_Chris_prior + P_Sara_prior)
+print("P_Chris_life_deal_posterior = ", P_Chris_life_deal_posterior)
+
+P_Sara_life_deal_posterior = P_Sara_prior / (P_Chris_prior + P_Sara_prior)
+print("P_Chris_life_deal_posterior = ", P_Sara_life_deal_posterior)
+
+
 # Whom belongs "love deal" to?
+print("Whom belongs love deal to?")
 P_Chris_prior = P_Chris * P_Chris_love * P_Chris_deal
 P_Sara_prior = P_Sara * P_Sara_love * P_Sara_deal
 print("This is Chris: ", P_Chris_prior)
@@ -24,5 +41,9 @@ print("This is Sara:", P_Sara_prior)
 
 print("Chris!") if P_Chris_prior > P_Sara_prior else print("Sara")
 
-P_Chris_life_deal = this_is_chris / (this_is_chris)
+P_Chris_life_deal_posterior = P_Chris_prior / (P_Chris_prior + P_Sara_prior)
+print("P_Chris_life_deal_posterior = ", P_Chris_life_deal_posterior)
+
+P_Sara_life_deal_posterior = P_Sara_prior / (P_Chris_prior + P_Sara_prior)
+print("P_Chris_life_deal_posterior = ", P_Sara_life_deal_posterior)
 

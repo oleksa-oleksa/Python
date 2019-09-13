@@ -25,12 +25,30 @@ Prior MULT Test Evidence ==> Posterior
 
 # Prior
 P_c = 0.01
-P_nonC_pos = 1 - P_c
-print("P_nonC_pos = ", P_nonC_pos)
+P_nonC = 1 - P_c
+print("P(-C) = ", P_nonC)
 # Test sensitivity
 P_pos_cancer = 0.9
+P_pos_nonC = 1 - P_pos_cancer
+print("P(Pos/-C) = ", P_pos_nonC)
+P_neg_nonC = 0.9
 
-# Posterior cancer
+
+# Posterior cancer JOINT
 P_c_pos = P_c * P_pos_cancer
+print("P(C/Pos) JOINT = ", P_c_pos)
 # Posterior NON cancer
-P_nonC_pos
+P_nonC_pos = P_nonC * P_pos_nonC
+print("P(-C/Pos) JOINT = ", P_nonC_pos)
+
+# Normalizer
+Norm = P_c_pos + P_nonC_pos
+print("Normalizer = ", Norm)
+
+# Posterior with normalizerRRR
+P_c_pos_norm = P_c_pos / Norm
+P_nonC_pos_norm = P_nonC_pos / Norm
+print("P(C/Pos) = ", P_c_pos_norm)
+print("P(-C/Pos) = ", P_nonC_pos_norm)
+total = P_c_pos_norm + P_nonC_pos_norm
+print("Total = ", total)

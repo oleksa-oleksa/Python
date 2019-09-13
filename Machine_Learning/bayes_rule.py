@@ -48,7 +48,7 @@ print("Normalizer = ", Norm)
 # Posterior with normalizerRRR
 P_c_pos_norm = P_c_pos / Norm
 P_nonC_pos_norm = P_nonC_pos / Norm
-print("P(C/Pos) = ", P_c_pos_norm)
+print("The probability that someone with a positive cancer test actually has the disease P(C/Pos) = ", P_c_pos_norm)
 print("P(-C/Pos) = ", P_nonC_pos_norm)
 total = P_c_pos_norm + P_nonC_pos_norm
 print("Total = ", total)

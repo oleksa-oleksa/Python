@@ -48,11 +48,28 @@ import pandas as pd
 import numpy as np
 from matplotlib import pyplot as plt
 
-training_data = np.loadtxt('./datasets/zip.train')
-test_data = np.loadtxt('./datasets/zip.test')
+def show_numbers(X):
+    num_samples = 90
+    indices = np.random.choice(range(len(X)), num_samples)
+    sample_digits = X[indices]
 
-X_train, y_train = training_data[:,1:], training_data[:,0]
+    fig = plt.figure(figsize=(20, 6))
+
+    for i in range(num_samples):
+        ax = plt.subplot(6, 15, i + 1)
+        img = 255 - sample_digits[i].reshape((16, 16))
+        plt.imshow(img, cmap='gray')
+        plt.axis('off')
+
+
+training_data = np.array(pd.read_csv('./datasets/zip.train', sep=' ', header=None, engine='python'))
+test_data = np.array(pd.read_csv('./datasets//zip.test', sep=' ', header=None, engine='python'))
+
+X_train, y_train = training_data[:,1:-1], training_data[:,0]
 X_test, y_test = test_data[:,1:], test_data[:,0]
+
+show_numbers(X_train)
 
 print(training_data.shape)
 print(test_data.shape)
+

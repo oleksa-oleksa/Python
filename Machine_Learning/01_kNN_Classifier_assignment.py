@@ -58,8 +58,9 @@ def show_numbers(X):
     for i in range(num_samples):
         ax = plt.subplot(6, 15, i + 1)
         img = 255 - sample_digits[i].reshape((16, 16))
-        plt.imshow(img, cmap='gray')
         plt.axis('off')
+        plt.imshow(img, cmap='gray')
+    plt.show()
 
 
 training_data = np.array(pd.read_csv('./datasets/zip.train', sep=' ', header=None, engine='python'))

@@ -66,6 +66,13 @@ class Classifier:
     That is, we want to feed it a series of images whose contents are known and
     tally the number of times the model’s prediction matches the true content of an image.
     The accuracy is the fraction of images that the model classifies correctly.
+    Because we are measuring our model’s accuracy, we have curated a set of images whose contents are known.
+    That is, we have a true label for each image, which is encoded as a class-ID.
+
+    Next, we can use NumPy’s vectorized logical operations, specifically ==, to get a boolean-valued array
+    that stores True wherever the predicted labels match the true labels and False everywhere else.
+    Recall that True behaves like 1 and False like 0. Thus, we can call np.mean on our resulting boolean-valued array
+    to compute the number of correct predictions divided by the total number of predictions. 
     """
     def accuracy(self, labels, predictions):
         # Compute the arithmetic mean along the specified axis

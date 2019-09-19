@@ -41,6 +41,15 @@ The test set is notoriously "difficult", and a 2.5% error rate is
 excellent. These data were kindly made available by the neural network
 group at AT&T research labs (thanks to Yann Le Cunn).
 
+================
+
+1. Open train and test datasets
+2. Define X-axis: Features aka properties that we use for learning (independent variables)
+3. Define Y-axis: Labels/Classes aka output our model should learn to produce (dependent variables)
+4. Print/plot data for visual understanding
+
+
+
 """
 
 
@@ -51,7 +60,13 @@ from matplotlib import pyplot as plt
 
 class Classifier:
 
-    # Accuracy refers to the closeness of a measured value to a standard or known value
+    """
+    Accuracy refers to the closeness of a measured value to a standard or known value
+    We want to measure the accuracy of our classifier.
+    That is, we want to feed it a series of images whose contents are known and
+    tally the number of times the model’s prediction matches the true content of an image.
+    The accuracy is the fraction of images that the model classifies correctly.
+    """
     def accuracy(self, labels, predictions):
         # Compute the arithmetic mean along the specified axis
         return np.mean(labels == predictions)
@@ -65,8 +80,9 @@ class Classifier:
 
 
 class KNearestNeighbors(Classifier):
-
+    # Use the Pythagorean theorem to determine the length of the hypotenuse
     def euclidean_distance(self, x_1, x_2):
+        # Sum of array elements over a given axis.
         return np.sum((x_1 - x_2) ** 2, axis=1)
 
     def fit(self, X, y):
@@ -83,6 +99,7 @@ class KNearestNeighbors(Classifier):
             predictions += [winner]
         print('Predictions for k=%d complete' % k)
         return predictions
+
 
 def show_numbers(X):
     num_samples = 90
@@ -109,7 +126,21 @@ X_test, y_test = test_data[:,1:], test_data[:,0]
 print(training_data.shape)
 print(test_data.shape)
 
-show_numbers(X_train)
-model = KNearestNeighbors()
+# show_numbers(X_train)
 
+model = KNearestNeighbors()
+model.fit(X_train, y_train)
+
+predictions_1 = model.predict(X_test, 1)
+predictions_2 = model.predict(X_test, 2)
+predictions_3 = model.predict(X_test, 3)
+
+print(model.accuracy(y_test, predictions_1))
+print(model.accuracy(y_test, predictions_2))
+print(model.accuracy(y_test, predictions_3))
+
+print(model.confusion_matrix(y_test, predictions_1))
+
+misclassified = X_test[(predictions_1 != y_test)]
+show_numbers(misclassified)
 

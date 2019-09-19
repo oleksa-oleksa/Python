@@ -48,8 +48,45 @@ import pandas as pd
 import numpy as np
 from matplotlib import pyplot as plt
 
+
+class Classifier:
+
+    # Accuracy refers to the closeness of a measured value to a standard or known value
+    def accuracy(self, labels, predictions):
+        # Compute the arithmetic mean along the specified axis
+        return np.mean(labels == predictions)
+
+    def confusion_matrix(self, labels, predictions):
+        size = len(set(labels))
+        matrix = np.zeros((size, size))
+        for correct, predicted in zip(labels.astype(int), predictions):
+            matrix[correct][predicted] += 1
+        return matrix
+
+
+class KNearestNeighbors(Classifier):
+
+    def euclidean_distance(self, x_1, x_2):
+        return np.sum((x_1 - x_2) ** 2, axis=1)
+
+    def fit(self, X, y):
+        self.X = X
+        self.y = y
+
+    def predict(self, X_test, k):
+        predictions = []
+        for sample in X_test:
+            distances = self.euclidean_distance(self.X, sample)
+            indices = np.argpartition(distances, k)[:k]
+            votes = (self.y[indices]).astype(int)
+            winner = np.argmax(np.bincount(votes, minlength=10))
+            predictions += [winner]
+        print('Predictions for k=%d complete' % k)
+        return predictions
+
 def show_numbers(X):
     num_samples = 90
+    # Generates a random sample from a given 1-D array
     indices = np.random.choice(range(len(X)), num_samples)
     sample_digits = X[indices]
 
@@ -69,8 +106,10 @@ test_data = np.array(pd.read_csv('./datasets//zip.test', sep=' ', header=None, e
 X_train, y_train = training_data[:,1:-1], training_data[:,0]
 X_test, y_test = test_data[:,1:], test_data[:,0]
 
-show_numbers(X_train)
-
 print(training_data.shape)
 print(test_data.shape)
+
+show_numbers(X_train)
+model = KNearestNeighbors()
+
 

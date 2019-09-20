@@ -92,6 +92,7 @@ class KNearestNeighbors(Classifier):
     # Use the Pythagorean theorem to determine the length of the hypotenuse
     def euclidean_distance(self, x_1, x_2):
         # Sum of array elements over a given axis.
+        # print(np.sum((x_1 - x_2) ** 2, axis=1))
         return np.sum((x_1 - x_2) ** 2, axis=1)
 
     def fit(self, X, y):

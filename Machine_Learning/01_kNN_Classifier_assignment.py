@@ -59,7 +59,6 @@ from matplotlib import pyplot as plt
 
 
 class Classifier:
-
     """
     Accuracy refers to the closeness of a measured value to a standard or known value
     We want to measure the accuracy of our classifier.
@@ -72,15 +71,18 @@ class Classifier:
     Next, we can use NumPy’s vectorized logical operations, specifically ==, to get a boolean-valued array
     that stores True wherever the predicted labels match the true labels and False everywhere else.
     Recall that True behaves like 1 and False like 0. Thus, we can call np.mean on our resulting boolean-valued array
-    to compute the number of correct predictions divided by the total number of predictions. 
+    to compute the number of correct predictions divided by the total number of predictions.
     """
     def accuracy(self, labels, predictions):
         # Compute the arithmetic mean along the specified axis
         return np.mean(labels == predictions)
 
     def confusion_matrix(self, labels, predictions):
+        # set() method is used to convert any of the iterable to the distinct element
+        # and sorted sequence of iterable elements, commonly called Set.
         size = len(set(labels))
         matrix = np.zeros((size, size))
+        # map the similar index of multiple containers so that they can be used just using as single entity.
         for correct, predicted in zip(labels.astype(int), predictions):
             matrix[correct][predicted] += 1
         return matrix

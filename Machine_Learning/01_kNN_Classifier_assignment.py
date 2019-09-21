@@ -103,7 +103,9 @@ class KNearestNeighbors(Classifier):
         predictions = []
         for sample in X_test:
             distances = self.euclidean_distance(self.X, sample)
+            # getting indexes of k first minimal elements
             indices = np.argpartition(distances, k)[:k]
+            # taking labels by indexes
             votes = (self.y[indices]).astype(int)
             winner = np.argmax(np.bincount(votes, minlength=10))
             predictions += [winner]

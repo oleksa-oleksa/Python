@@ -107,6 +107,7 @@ class KNearestNeighbors(Classifier):
             indices = np.argpartition(distances, k)[:k]
             # taking labels by indexes
             votes = (self.y[indices]).astype(int)
+            # the class with maximum votes => the class with minimal distance to k nearest neighbors
             winner = np.argmax(np.bincount(votes, minlength=10))
             predictions += [winner]
         print('Predictions for k=%d complete' % k)

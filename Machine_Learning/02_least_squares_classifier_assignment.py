@@ -31,18 +31,25 @@ class Classifier:
 
 
 class LeastSquares(Classifier):
-    def euclidean_distance(self, x_1, x_2):
-        # Sum of array elements over a given axis.
-        # print(np.sum((x_1 - x_2) ** 2, axis=1))
+    def linear_distance_x(self, x, x_mean):
         return np.sum((x_1 - x_2) ** 2, axis=1)
+
+    def mean(self, X_test):
+        return np.mean(X_test)
 
     def fit(self, X, y):
         self.X = X
         self.y = y
 
-    def predict(self, X_test, k):
+    def predict(self, X_test, Y_test):
         predictions = []
-        print('Predictions for k=%d complete' % k)
+        x_mean = self.linear_distance(X_test)
+        y_mean = self.linear_distance(Y_test)
+
+        for sample in X_test:
+            predictions += [sample]
+
+        print('Linear regression complete')
         return predictions
 
 
@@ -51,3 +58,9 @@ test_data = np.array(pd.read_csv('./datasets//zip.test', sep=' ', header=None, e
 
 X_train, y_train = training_data[:,1:-1], training_data[:,0]
 X_test, y_test = test_data[:,1:], test_data[:,0]
+
+
+model = LeastSquares()
+model.fit(X_train, y_train)
+
+predictions = 

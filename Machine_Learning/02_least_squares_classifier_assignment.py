@@ -44,3 +44,10 @@ class LeastSquares(Classifier):
         predictions = []
         print('Predictions for k=%d complete' % k)
         return predictions
+
+
+training_data = np.array(pd.read_csv('./datasets/zip.train', sep=' ', header=None, engine='python'))
+test_data = np.array(pd.read_csv('./datasets//zip.test', sep=' ', header=None, engine='python'))
+
+X_train, y_train = training_data[:,1:-1], training_data[:,0]
+X_test, y_test = test_data[:,1:], test_data[:,0]

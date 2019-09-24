@@ -31,22 +31,27 @@ class Classifier:
 
 
 class LeastSquares(Classifier):
-    def linear_distance_x(self, x, x_mean):
-        return np.sum((x_1 - x_2) ** 2, axis=1)
+    def linear_distance(self, data, data_mean):
+        return data - data_mean
 
     def mean(self, X_test):
         return np.mean(X_test)
 
-    def fit(self, X, y):
-        self.X = X
+    def fit(self, x, y):
+        self.x = x
         self.y = y
 
-    def predict(self, X_test, Y_test):
+    def predict(self, x_test, y_test):
         predictions = []
-        x_mean = self.linear_distance(X_test)
-        y_mean = self.linear_distance(Y_test)
+        distances_x = []
+        distances_x = []
+        x_mean = self.linear_distance(x_test)
+        y_mean = self.linear_distance(y_test)
 
-        for sample in X_test:
+        for sample in x_test:
+            distances_x = self.linear_distance(sample, x_mean)
+            distances_y = self.linear_distance(sample, x_mean)
+
             predictions += [sample]
 
         print('Linear regression complete')
@@ -56,11 +61,11 @@ class LeastSquares(Classifier):
 training_data = np.array(pd.read_csv('./datasets/zip.train', sep=' ', header=None, engine='python'))
 test_data = np.array(pd.read_csv('./datasets//zip.test', sep=' ', header=None, engine='python'))
 
-X_train, y_train = training_data[:,1:-1], training_data[:,0]
-X_test, y_test = test_data[:,1:], test_data[:,0]
+x_train, y_train = training_data[:,1:-1], training_data[:,0]
+x_test, y_test = test_data[:,1:], test_data[:,0]
 
 
 model = LeastSquares()
-model.fit(X_train, y_train)
+model.fit(x_train, y_train)
 
-predictions = 
+predictions = model.predict(x_test, y_test)

@@ -44,15 +44,26 @@ class LeastSquares(Classifier):
     def predict(self, x_test, y_test):
         predictions = []
         distances_x = []
-        distances_x = []
+        distances_x_squared = []
+        distances_y = []
+        distances_xy = []
         x_mean = self.linear_distance(x_test)
         y_mean = self.linear_distance(y_test)
 
         for sample in x_test:
-            distances_x = self.linear_distance(sample, x_mean)
-            distances_y = self.linear_distance(sample, x_mean)
+            delta_x = self.linear_distance(sample, x_mean)
+            distances_x.append(delta_x)
+            distances_x_squared.append(delta_x ** 2)
 
-            predictions += [sample]
+            delta_y = self.linear_distance(sample, y_mean)
+            distances_y.append(delta_y)
+            distances_xy.append(delta_y * distances_x[sample])
+
+        # y = b0 + slope*x
+        slope = np.sum(distances_xy) / np.sum(distances_x_squared)
+        intercept = 
+
+        predictions += [sample]
 
         print('Linear regression complete')
         return predictions

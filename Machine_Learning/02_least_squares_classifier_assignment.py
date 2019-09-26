@@ -47,8 +47,8 @@ class LeastSquares(Classifier):
         distances_x_squared = []
         distances_y = []
         distances_xy = []
-        x_mean = self.linear_distance(x_test)
-        y_mean = self.linear_distance(y_test)
+        x_mean = self.linear_distance(self.x)
+        y_mean = self.linear_distance(self.y)
 
         for sample in x_test:
             delta_x = self.linear_distance(sample, x_mean)
@@ -59,9 +59,9 @@ class LeastSquares(Classifier):
             distances_y.append(delta_y)
             distances_xy.append(delta_y * distances_x[sample])
 
-        # y = b0 + slope*x
+        # y = b0 + slope * x
         slope = np.sum(distances_xy) / np.sum(distances_x_squared)
-        intercept = 
+        intercept = y_mean - slope * x_mean
 
         predictions += [sample]
 
@@ -75,8 +75,9 @@ test_data = np.array(pd.read_csv('./datasets//zip.test', sep=' ', header=None, e
 x_train, y_train = training_data[:,1:-1], training_data[:,0]
 x_test, y_test = test_data[:,1:], test_data[:,0]
 
-
 model = LeastSquares()
 model.fit(x_train, y_train)
 
 predictions = model.predict(x_test, y_test)
+
+print(model.confusion_matrix(y_test, predictions))

@@ -25,7 +25,7 @@ class Classifier:
         size = len(set(labels))
         matrix = np.zeros((size, size))
         # map the similar index of multiple containers so that they can be used just using as single entity.
-        for correct, predicted in zip(labels.astype(int), np.round(predictions)):
+        for correct, predicted in zip(labels.astype(int), predictions):
             matrix[correct][predicted] += 1
         return matrix
 
@@ -62,7 +62,7 @@ class LeastSquares(Classifier):
         intercept = y_mean - slope * x_mean
 
         for sample in x_test:
-            predictions.append(intercept + slope * sample)
+            predictions += intercept + slope * sample
 
         print('Linear regression complete')
         return predictions

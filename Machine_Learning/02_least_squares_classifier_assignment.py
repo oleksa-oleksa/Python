@@ -34,6 +34,14 @@ class LeastSquares(Classifier):
     def linear_distance(self, data, data_mean):
         return data - data_mean
 
+    def mean_x(self):
+        for test_sample in self.x:
+            self.x_mean = np.mean(test_sample)
+
+    def mean_y(self):
+        for test_sample in self.y:
+            self.y_mean = np.mean(test_sample)
+
     def fit(self, x, y):
         self.x = x
         self.y = y
@@ -44,8 +52,9 @@ class LeastSquares(Classifier):
         distances_x_squared = []
         distances_y = []
         distances_xy = []
-        x_mean = np.mean(self.x)
-        y_mean = np.mean(self.y)
+        #x_mean = np.mean(self.x)
+        #print(x_mean)
+        #y_mean = np.mean(self.y)
 
         for sample in x_test:
             delta_x = self.linear_distance(sample, x_mean)
@@ -62,9 +71,10 @@ class LeastSquares(Classifier):
         intercept = y_mean - slope * x_mean
 
         for sample in x_test:
-            predictions += intercept + slope * sample
+            predictions.append(intercept + slope * sample)
 
         print('Linear regression complete')
+        # print(predictions)
         return predictions
 
 

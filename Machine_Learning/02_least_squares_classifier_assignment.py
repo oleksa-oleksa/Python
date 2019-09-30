@@ -52,9 +52,9 @@ class LeastSquares(Classifier):
         distances_x_squared = []
         distances_y = []
         distances_xy = []
-        #x_mean = np.mean(self.x)
-        #print(x_mean)
-        #y_mean = np.mean(self.y)
+        x_mean = np.mean(self.x, axis=1)
+        print(self.x.shape, x_mean.shape, x_test.shape)
+        y_mean = np.mean(self.y, axis=1)
 
         for sample in x_test:
             delta_x = self.linear_distance(sample, x_mean)

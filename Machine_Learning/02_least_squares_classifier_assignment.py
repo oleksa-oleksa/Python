@@ -44,14 +44,9 @@ class LeastSquares(Classifier):
 
     def fit(self, x, y):
         self.x = x
-        self.y = y
+        self.y = y[:, np.newaxis]
 
     def predict(self, x_test):
-        predictions = []
-        distances_x = []
-        distances_x_squared = []
-        distances_y = []
-        distances_xy = []
         x_mean = np.mean(self.x, axis=1, keepdims=True)
         # print(self.x.shape, x_mean.shape, x_test.shape)
         y_mean = np.mean(self.y)
@@ -60,23 +55,13 @@ class LeastSquares(Classifier):
         delta_y = self.y - y_mean
 
         delta_x_squared = delta_x ** 2
-        # print(delta_x_squared)
-
-        distances_xy = delta_y * delta_x_squared
-
-        for sample in x_test:
-            delta_x = self.linear_distance(sample, x_mean)
-            distances_x.append(delta_x)
-            delta_x_squared = delta_x ** 2
-            distances_x_squared.append(delta_x_squared)
-
-            distances_y.append(delta_y)
-            distances_xy.append(delta_y * delta_x_squared)
+        distances_xy = delta_x * delta_y
 
         # y = intercept + slope * x
-        slope = np.sum(distances_xy) / np.sum(distances_x_squared)
-        intercept = y_mean - slope * x_mean
+        slope = np.sum(distances_xy, axis=0) / np.sum(delta_x_squared, axis=0)
 
+        intercept = y_mean - np.dot(slope, x_mean)
+        print(slope.shape, x_mean.shape, intercept)
         for sample in x_test:
             predictions.append(intercept + slope * sample)
 

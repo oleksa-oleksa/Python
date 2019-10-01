@@ -47,8 +47,9 @@ class LeastSquares(Classifier):
         self.y = y[:, np.newaxis]
 
     def predict(self, x_test):
-        x_mean = np.mean(self.x, axis=1, keepdims=True)
-        # print(self.x.shape, x_mean.shape, x_test.shape)
+        predictions = []
+        x_mean = np.mean(self.x, axis=0, keepdims=True)
+        print(self.x.shape, x_mean.shape, x_test.shape)
         y_mean = np.mean(self.y)
 
         delta_x = self.x - x_mean
@@ -60,13 +61,13 @@ class LeastSquares(Classifier):
         # y = intercept + slope * x
         slope = np.sum(distances_xy, axis=0) / np.sum(delta_x_squared, axis=0)
 
-        intercept = y_mean - np.dot(slope, x_mean)
+        intercept = y_mean - np.dot(slope, x_mean.T)
         print(slope.shape, x_mean.shape, intercept)
         for sample in x_test:
             predictions.append(intercept + slope * sample)
 
         print('Linear regression complete')
-        # print(predictions)
+        print(predictions)
         return predictions
 
 

@@ -24,8 +24,10 @@ class Classifier:
         # and sorted sequence of iterable elements, commonly called Set.
         size = len(set(labels))
         matrix = np.zeros((size, size))
+        # predictions_list = [round(x) for x in predictions]
+
         # map the similar index of multiple containers so that they can be used just using as single entity.
-        for correct, predicted in zip(labels.astype(int), predictions):
+        for correct, predicted in zip(labels.astype(int), np.array(predictions).astype(int)):
             matrix[correct][predicted] += 1
         return matrix
 
@@ -49,8 +51,11 @@ class LeastSquares(Classifier):
     def predict(self, x_test):
         predictions = []
         x_mean = np.mean(self.x, axis=0, keepdims=True)
-        print(self.x.shape, x_mean.shape, x_test.shape)
+        # print("x_mean: ", x_mean)
+        # print(self.x.shape, x_mean.shape, x_test.shape)
         y_mean = np.mean(self.y)
+        print("y_mean: ", y_mean)
+
 
         delta_x = self.x - x_mean
         delta_y = self.y - y_mean
@@ -64,10 +69,11 @@ class LeastSquares(Classifier):
         intercept = y_mean - np.dot(slope, x_mean.T)
         print(slope.shape, x_mean.shape, intercept)
         for sample in x_test:
-            predictions.append(intercept + slope * sample)
+            y = slope * sample + intercept
+            predictions.append(y)
 
         print('Linear regression complete')
-        print(predictions)
+        # print(predictions)
         return predictions
 
 

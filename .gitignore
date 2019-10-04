@@ -11,3 +11,4 @@ wsgi.py
 __init__.py
 migrations
 static_cdn_test
+.ipynb_checkpoints/

@@ -61,3 +61,18 @@ plt.show()
 print(
     'Number of draws left: %d, Posterior mean: %.3f, Posterior median: %.3f, Posterior 95%% quantile interval: %.3f-%.3f' %
     (len(post_rate), post_rate.mean(), post_rate.median(), post_rate.quantile(.025), post_rate.quantile(.975)))
+
+"""What’s the probability that method A is better than telemarketing?"""
+print(np.mean(post_rate > 0.2))
+
+"""If method A was used on 100 people what would be number of sign-ups?"""
+signups = list()
+
+for p in post_rate:
+    signups.append(np.random.binomial(100, p))
+
+
+plt.hist(signups)
+plt.show
+print('Sign-up Posterior 95%% quantile interval: %.3f-%.3f' % (post_rate.quantile(.25), post_rate.quantile(.975)))
+

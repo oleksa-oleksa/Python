@@ -11,12 +11,14 @@ and marketing now wants to know, how good is method A?"""
 # Import libraries
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+
 
 # Number of random draws from the prior
 n_draws = 10000
 
 # Here you sample n_draws draws from the prior into a pandas Series (to have convenient
 # methods available for histograms and descriptive statistics, e.g. median)
-prior = pd.Series(...)
-print(prior)
-prior.hist()
+prior = pd.Series(np.random.uniform(0, 1, size=n_draws))
+plt.hist(prior)
+plt.show()

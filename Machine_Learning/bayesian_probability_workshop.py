@@ -1,4 +1,7 @@
-"""Swedish Fish Incorporated is the largest Swedish company delivering fish by mail order.
+"""
+https://github.com/rasmusab/bayesianprobabilitiesworkshop/blob/master/Exercise%201.ipynb
+
+Swedish Fish Incorporated is the largest Swedish company delivering fish by mail order.
 They are now trying to get into the lucrative Danish market by selling one year Salmon subscriptions.
 The marketing department have done a pilot study and tried the following marketing method:
 
@@ -19,6 +22,42 @@ n_draws = 10000
 
 # Here you sample n_draws draws from the prior into a pandas Series (to have convenient
 # methods available for histograms and descriptive statistics, e.g. median)
-prior = pd.Series(np.random.uniform(0, 1, size=n_draws))
-plt.hist(prior)
+prior_rate = pd.Series(np.random.uniform(0, 1, size=n_draws))
+# plt.hist(prior_rate)
+# plt.show()
+
+
+# Defining the generative model
+def gen_model(prob):
+    mod = np.random.binomial(16, prob)
+    # print(mod)
+    return mod
+
+
+#  the generative model
+subscribers = list()
+
+# Simulating the data
+for p in prior_rate:
+    # print(p)
+    subscribers.append(gen_model(p))
+
+# Observed data
+observed_data = 6
+
+# Here you filter off all draws that do not match the data.
+post_rate = prior_rate[list(map(lambda x: x == observed_data, subscribers))]
+
+plt.hist(post_rate)
 plt.show()
+
+# See that we got enought draws left after the filtering.
+# There are no rules here, but you probably want to aim for >1000 draws.
+
+# Now you can summarize the posterior, where a common summary is to take the mean or the median posterior,
+# and perhaps a 95% quantile interval.
+
+
+print(
+    'Number of draws left: %d, Posterior mean: %.3f, Posterior median: %.3f, Posterior 95%% quantile interval: %.3f-%.3f' %
+    (len(post_rate), post_rate.mean(), post_rate.median(), post_rate.quantile(.025), post_rate.quantile(.975)))

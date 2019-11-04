@@ -1,0 +1,5 @@
+Key lenght : 40, 56, 64, 80, 112, 128 Bit
+ASIC 2^44 keys pro second 
+cost: 50€ (buy) + 50€(maintain)
+
+The brute-force attack:

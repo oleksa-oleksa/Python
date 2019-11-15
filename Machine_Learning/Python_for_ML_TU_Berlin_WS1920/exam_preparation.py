@@ -26,4 +26,17 @@ pmae(X, Y)
 # Values are generated within the half-open interval [start, stop)
 # (in other words, the interval including start but excluding stop).
 A = np.arange(-2, 10, 4).reshape((1, 3))
-print(A)
+print("A:", A)
+
+B = np.arange(-100, 101, 10).reshape((7, 3))
+#print(B)
+C = np.arange(100, -101, -10).reshape((7, 3))
+#print(C)
+
+D = np.array([1, 2, 3])**2
+print(D)
+D = D[:, None]
+print("D:", D)
+#D = D.reshape((3))
+#print(D)
+print(0.5*A + D)

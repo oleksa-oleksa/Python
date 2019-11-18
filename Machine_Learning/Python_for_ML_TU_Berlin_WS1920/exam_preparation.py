@@ -76,3 +76,16 @@ B = Bernoulli()
 B.fit(['H', 'H', 'H', 'T', 'H', 'T', 'T', 'H', 'T', 'T'])
 print(B.info())
 
+# ======= Pure Python => Numpy
+
+def slow1(X):
+    n, m = X.shape
+    D = np.empty_like(X)
+    D[0] = [x**2 for x in X[1]]
+    for i in range(m):
+        D[1, i] = abs(D[0, i] - X[1, i])
+    return D
+
+
+X = np.arange(10).reshape(2, 5)
+print(slow1(X))

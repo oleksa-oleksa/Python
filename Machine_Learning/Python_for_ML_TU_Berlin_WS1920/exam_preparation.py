@@ -14,10 +14,9 @@ def pmae(X, Y, p=0.5):
     return tuple([sm**p, p])
 
 
-X = ('apple', 'banana', 'cherry')
-Y = ('kyiw', 'odessa', 'lwiw')
+X = np.arange(10).reshape(2, 5)
 
-#Y = ([[4, 5], [1, 1]])
+Y = np.arange(10, 20).reshape(2, 5)
 
 pmae(X, Y)
 '''
@@ -78,6 +77,7 @@ print(B.info())
 
 # ======= Pure Python => Numpy
 
+
 def slow1(X):
     n, m = X.shape
     D = np.empty_like(X)
@@ -87,5 +87,49 @@ def slow1(X):
     return D
 
 
+def fast1(X):
+    D = np.empty_like(X)
+    D[0] = X[1]**2
+    D[1] = np.abs(D[0] - X[1])
+    return D
+
+
 X = np.arange(10).reshape(2, 5)
 print(slow1(X))
+print(fast1(X))
+
+
+def slow2(X):
+    N, d = X.shape
+    for j in range(d):
+        s = 0
+        for i in range(N):
+            s += X[i, j]
+        for i in range(N):
+            X[i, j] -= s/N
+    return X
+
+
+def fast2(X):
+    N, d = X.shape
+    return X - np.mean(X)
+
+
+print(np.sum(slow2(X) - fast2(X)))
+
+from math import log
+
+
+def slow3(X, C):
+    N, f = X.shape
+    M, f = C.shape
+    D = np.zeros(N, M)
+    for n in range(N):
+        for m in range(M):
+            for k in range(f):
+                a, b = X[n, k], C[m, k]
+                D[n,m] += abs(a-b)
+    for n in range(N):
+        for m in range(M):
+            D[n, M] = log(1 + D[n, m])
+    return D

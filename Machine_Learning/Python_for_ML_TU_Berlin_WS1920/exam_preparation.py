@@ -5,7 +5,7 @@ print([int(1), float(1), str(1)])
 print([-0.5*2**4, str(643)[-2]] + [tuple(2*[3]), (6 != 1) == True])
 print([2, 3] + [4, 5])
 
-'''
+
 def pmae(X, Y, p=0.5):
     sm = 0
     for n, x in enumerate(X):
@@ -14,12 +14,12 @@ def pmae(X, Y, p=0.5):
     return tuple([sm**p, p])
 
 
-X = np.arange(10).reshape(2, 5)
+x = np.arange(1, 10)
+y = np.random.rand(9)
 
-Y = np.arange(10, 20).reshape(2, 5)
+pmae(x, y)
 
-pmae(X, Y)
-'''
+
 
 # numpy.arange([start, ]stop, [step, ]dtype=None)
 # Values are generated within the half-open interval [start, stop)
@@ -165,5 +165,8 @@ print(visited_states[:10])
 
 
 #===========
-
-
+n_states = dict()
+for key in T:
+    n_states[key] = visited_states.count(key)
+key_min = min(n_states.keys(), key=(lambda k: n_states[k]))
+print('State:', names[key_min], 'visited times:', n_states[key_min])

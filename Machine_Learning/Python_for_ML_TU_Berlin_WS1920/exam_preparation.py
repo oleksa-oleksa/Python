@@ -123,7 +123,7 @@ from math import log
 def slow3(X, C):
     N, f = X.shape
     M, f = C.shape
-    D = np.zeros(N, M)
+    D = np.zeros((N, M))
     for n in range(N):
         for m in range(M):
             for k in range(f):
@@ -131,5 +131,16 @@ def slow3(X, C):
                 D[n,m] += abs(a-b)
     for n in range(N):
         for m in range(M):
-            D[n, M] = log(1 + D[n, m])
+            D[n, m] = log(1 + D[n, m])
     return D
+
+
+def fast3(X, C):
+    D = np.abs(X[:, None] - C[:,None]).sum()
+    return np.log(1 + D)
+
+
+X = np.arange(12).reshape(3, 4)
+X = np.arange(15).reshape(3, 5)
+print(np.sum(slow3(X, C) - fast3(X, C)))
+

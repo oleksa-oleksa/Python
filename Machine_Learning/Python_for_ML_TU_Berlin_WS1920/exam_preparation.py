@@ -136,11 +136,34 @@ def slow3(X, C):
 
 
 def fast3(X, C):
-    D = np.abs(X[:, None] - C[:,None]).sum()
+    D = np.zeros((X.shape[0], C.shape[0]))
+    D = np.abs(X - C)
+    print("D shape:", D.shape)
     return np.log(1 + D)
 
 
-X = np.arange(12).reshape(3, 4)
-X = np.arange(15).reshape(3, 5)
-print(np.sum(slow3(X, C) - fast3(X, C)))
+X2 = np.arange(12).reshape(3, 4)
+C2 = np.arange(12).reshape(3, 4)
+#print(np.sum(slow3(X2, C2) - fast3(X2, C2)))
+
+#print(slow3(X2, C2))
+#print(fast3(X2, C2))
+
+# =========
+T = {'A': 'BCD', 'B': 'AC', 'C': 'AB', 'D': 'A'}
+names = {'A': 'lobby', 'B': 'kitchen', 'C': 'bedroom', 'D': 'bathroom'}
+import random
+initial_state = 'A' # starting always with A
+visited_states = [initial_state]
+
+for x in range(1, 1000): # initial_state included
+    next_state = random.choice(T[initial_state])
+    visited_states += next_state
+    initial_state = next_state
+
+print(visited_states[:10])
+
+
+#===========
+
 

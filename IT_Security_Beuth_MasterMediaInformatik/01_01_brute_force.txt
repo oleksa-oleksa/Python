@@ -40,6 +40,22 @@ We assume 2^13 + 2^10 ===> ~ 2^13 = 10 000 ASICs
 128 Bit
 128 - 44 = 84
 2^84 * 2^44 = 2^71 * 2^13 * 2^44 = (calculations done in Python3) = (2**71/60/60/24/30/12) * 2^13 * 2^44 
-= 2^46 years for all 10 000 ASICs
+= 2^46 years for all 10
+
+=======================
+
+
+Moore's law is the observation that the number of transistors in a dense integrated circuit doubles about every two years.
+
+We assume Bitcoin Miningrate 2^80
+
+Today 2019 (task) = 2^44
+80 - 44 = 36
+In 72 years can be build a computer that can hack the 2^80 key in 1 second
+24 hours ~ 2^4.5 ===> 36 - 4.5 = 31.5 ==> In 63 years can be build a computer that can hack the 2^80 key in 24 hours
+
+====================
+64 bit: 1 million euro and 2 secs time
+80 bit: budget: 1 million euro and 3 month+ time
 
 

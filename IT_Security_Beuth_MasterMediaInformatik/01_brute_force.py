@@ -22,7 +22,42 @@ def sec_to_years(sec):
     return (((sec/60)/60)/24)/365
 
 speed_dev = 2**44
-n_dev = 1000000/100
+money = 1000000
+# 50 euro per asic, 50 euro per integration
+costPerAsic = 50 + 50
+n_dev = money/costPerAsic
+print("How many units can be operated in parallel with the available budget? : ", n_dev)
+
+keyLength = [40, 56, 64, 80, 112, 128]  # bit
+
+print("How long does average key search time take? :")
+
+for length in keyLength:
+    print("------------------------------- \n")
+    print("Search time at a key length of " + str(length) + " bit \n")
+
+    maxTries = float(2 ** length)
+    avgTries = length
+
+    maxSeconds = maxTries / float(speed_dev)
+    avgSeconds = avgTries / float(speed_dev)
+    minSeconds = float(1 / float(speed_dev))
+
+    print("Minimum: \n    1 try.")
+    print("    " + '{:.10f}'.format(minSeconds) + " seconds. \n")
+
+    print("Average: \n    " + '{:.0f}'.format(avgTries) + " tries")
+    print("in  " + '{:.0f}'.format(avgSeconds) + " seconds.")
+    print("in  " + '{:.0f}'.format(sec_to_min(avgSeconds)) + " minutes.")
+    print("in  " + '{:.0f}'.format(sec_to_hour(avgSeconds)) + " hours.")
+    print("in  " + '{:.0f}'.format(sec_to_day(avgSeconds)) + " days.")
+    print("in  " + '{:.0f}'.format(sec_to_years(avgSeconds)) + " years.")
+    print("in  " + '{:.0f}'.format(math.log(sec_to_years(avgSeconds), 2)) + " years.")
+
+
+
+
+
 
 bit_40 = 2**40 / speed_dev
 print("40 bit time in seconds: ", bit_40)

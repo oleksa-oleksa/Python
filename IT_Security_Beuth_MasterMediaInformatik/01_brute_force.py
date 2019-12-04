@@ -37,23 +37,30 @@ for length in keyLength:
     print("Search time at a key length of " + str(length) + " bit \n")
 
     maxTries = float(2 ** length)
-    avgTries = length
+    avgTries = float(maxTries / 2)
 
     maxSeconds = maxTries / float(speed_dev)
     avgSeconds = avgTries / float(speed_dev)
     minSeconds = float(1 / float(speed_dev))
 
     print("Minimum: \n    1 try.")
-    print("    " + '{:.10f}'.format(minSeconds) + " seconds. \n")
+    print("    " + '{:30f}'.format(minSeconds) + " (a very small fraction of a second) \n")
 
-    print("Average: \n    " + '{:.0f}'.format(avgTries) + " tries")
-    print("in  " + '{:.0f}'.format(avgSeconds) + " seconds.")
-    print("in  " + '{:.0f}'.format(sec_to_min(avgSeconds)) + " minutes.")
-    print("in  " + '{:.0f}'.format(sec_to_hour(avgSeconds)) + " hours.")
-    print("in  " + '{:.0f}'.format(sec_to_day(avgSeconds)) + " days.")
-    print("in  " + '{:.0f}'.format(sec_to_years(avgSeconds)) + " years.")
-    print("in  " + '{:.0f}'.format(math.log(sec_to_years(avgSeconds), 2)) + " years.")
+    print("Average: \n    " + '{:.2f}'.format(avgTries) + " tries")
+    print("in  " + '{:.5f}'.format(avgSeconds) + " seconds.")
+    print("in  " + '{:.2f}'.format(sec_to_min(avgSeconds)) + " minutes.")
+    print("in  " + '{:.2f}'.format(sec_to_hour(avgSeconds)) + " hours.")
+    print("in  " + '{:.2f}'.format(sec_to_day(avgSeconds)) + " days.")
+    print("in  " + '{:.2f}'.format(sec_to_years(avgSeconds)) + " years.")
+    print("in  2^" + '{:.2f}'.format(math.log(sec_to_years(avgSeconds), 2)) + " years.")
 
+    print("Maximum: \n    " + '{:.0f}'.format(maxTries) + " tries")
+    print("in  " + '{:.5f}'.format(maxSeconds) + " seconds.")
+    print("in  " + '{:.2f}'.format(sec_to_min(maxSeconds)) + " minutes.")
+    print("in  " + '{:.2f}'.format(sec_to_hour(maxSeconds)) + " hours.")
+    print("in  " + '{:.2f}'.format(sec_to_day(maxSeconds)) + " days.")
+    print("in  " + '{:.2f}'.format(sec_to_years(maxSeconds)) + " years.")
+    print("in  2^" + '{:.2f}'.format(math.log(sec_to_years(maxSeconds), 2)) + " years.")
 
 
 

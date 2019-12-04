@@ -2,7 +2,7 @@ import random
 
 # German alphabet
 alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
-       'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'ä', 'ö', 'ü', 'ß']
+            'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'ä', 'ö', 'ü', 'ß']
 
 
 # ================================================================
@@ -17,16 +17,15 @@ def check_german_letters(plain_text, alphabet):
     return new_plain_text
 
 
-
 # german letters copy and mix
 shuffled_abc = alphabet[:]
 random.shuffle(shuffled_abc)
 
 # create dict
-wb = dict(zip(alphabet, shuffled_abc))
+dict_german = dict(zip(alphabet, shuffled_abc))
 
 # Open and read sample text
-f = open("plainText_sample1.txt")
+f = open("plaintext_01.txt")
 raw_text = ""
 for line in f:
     raw_text += line.rstrip()
@@ -37,12 +36,13 @@ plain_text = check_german_letters(raw_text, alphabet)
 print("I have read the text:")
 print(plain_text)
 
-# text decode
-cipherText = ""
+# text encode
+ciphertext = ""
 for c in plain_text:
-    cipherText = cipherText+wb[c]
-print cipherText
-#verschlüselten Text in Datei schreiben
-f = open("encryptedText.txt", "w")
-f.write(cipherText)
+    cipherText = ciphertext + dict_german[c]
+print(ciphertext)
+
+# write file with the text
+f = open("encryptedtext.txt", "w")
+f.write(ciphertext)
 f.close()

@@ -33,14 +33,15 @@ f.close()
 
 # clear text
 plain_text = check_german_letters(raw_text, alphabet)
-print("I have read the text:")
-print(plain_text)
+print("Plain text: ========> ")
+print(plain_text, "\n")
 
 # text encode
 ciphertext = ""
 for c in plain_text:
-    cipherText = ciphertext + dict_german[c]
-print(ciphertext)
+    ciphertext = ciphertext + dict_german[c]
+print("Secret text: ========> :")
+print(ciphertext, "\n")
 
 # write file with the text
 f = open("encryptedtext.txt", "w")

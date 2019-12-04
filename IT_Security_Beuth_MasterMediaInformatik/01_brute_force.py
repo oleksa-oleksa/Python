@@ -62,10 +62,96 @@ for length in keyLength:
     print("in  " + '{:.2f}'.format(sec_to_years(maxSeconds)) + " years.")
     print("in  2^" + '{:.2f}'.format(math.log(sec_to_years(maxSeconds), 2)) + " years.")
 
+    print("------------------------------- \n")
+    print("Moore with 1 000 000 000 budget")
+    # Das mooresche Gesetz besagt,
+    # dass sich die Komplexitaet integrierter Schaltkreise mit minimalen Komponentenkosten
+    # regelmaessig verdoppelt;
+    # je nach Quelle werden 12 bis 24 Monate als Zeitraum genannt.
+    # meistens 18 Monate
+
+    # N(t): power after years
+    # N0:   start power
+    # t:    years
+    # N(t) = N0 * 2^t
+    # t= ln(  N(t) / N0  )  /  ln(2)
+
+    # http://www.mathe-paradies.de/mathe/gleichungsloeser/index.htm
+    # A = B * 2^X
+
+    futureMoney = 1000000000
+
+    # 1 Mrd / (50 + 50)
+    maxAsics = float(futureMoney / costPerAsic)
+
+    keysPerDay = speed_dev * maxAsics * float(60 * 60 * 24)
+
+    # unit: keys per second
+    days = avgTries / keysPerDay  # 24h
+
+    print("days=" + str(days))
+    print("keysPerDay=" + str(keysPerDay))
+
+    years = 0
+
+    asictmp = speed_dev
+    while days > 1:
+        years = years + 1.5
+        asictmp = asictmp * 2
+        keysPerDay = asictmp * maxAsics * float(60 * 60 * 24)
+        days = avgTries / keysPerDay
+
+    print("years=" + str(years))
+
+    futureMoney = 1000000000
+
+    # 1 Mrd / (50 + 50)
+    futureMaxAsics = float(futureMoney / costPerAsic)
+
+    # unit: keys per second
+    requieredKeysPerSecond = maxTries / float(60 * 60 * 24)  # 24h
+
+    # N(t) = N0 * 2^t
+    requieredASICs = requieredKeysPerSecond / futureMaxAsics
+
+    # t= ln(  N(t) / N0  )  /  ln(2)
+    requieredYears = math.log(requieredASICs / speed_dev) / math.log(2)
+
+    if requieredYears <= 0:
+        print("Already exists")
+    else:
+        print("In " + str(format(requieredYears, '.2f')) +
+              " years according to Moore's Law can be built a machine, that can hack a " + str(length) +
+              " key in 24 hours.")
+    print("##########################################")
+
+print("======================================================================")
+print("How expensive is an attack with the complexity 2^64 and 2^80 measured by the current bitcoin mining rate")
+"""Hash Rate is the speed at which a compute is completing an operation in the Bitcoin code. """
+current_rate = 89 * 10**18  # exahash
+
+complexity = [64, 80]
+# formula: time = (sec/60)/60)/24
+# time = 1 day ===>
+# 1 = (2^64 * current_rate) / (speed_dev * num_dev)
+# speed_dev * num_dev = 2^64 * current_rate
+# num_dev = (2^64 * current_rate) / speed_dev
+for c in complexity:
+    comp = (2**64 * current_rate) / speed_dev
+    print("Only with one AISC for complexity", c)
+    print("in  " + '{:.2f}'.format(sec_to_day(comp)) + " days.")
+    print("in  " + '{:.2f}'.format(sec_to_years(comp)) + " years.")
+    print("in  2^" + '{:.2f}'.format(math.log(sec_to_years(comp), 2)) + " years.")
+
+    num_asic = (2**64 * current_rate) / speed_dev
+    money = num_asic * costPerAsic
+    print("To hack within 24 hours for complexity", c)
+    print("amount of ASICs: 2^ {:.2f}".format(math.log(sec_to_years(num_asic), 2)))
+    print("Money: {:.2f} €".format((sec_to_years(money))))
+    print("Money: 2^{:.2f} €".format(math.log(sec_to_years(money), 2)))
 
 
-
-
+"""
 bit_40 = 2**40 / speed_dev
 print("40 bit time in seconds: ", bit_40)
 
@@ -87,4 +173,6 @@ print("112 bit needs 2^{:.2f} years".format(math.log(sec_to_years(bit_112), 2)))
 bit_128 = 2**128 / speed_dev
 print("128 bit time in seconds: {:.2f}, minutes: {:.2f}, hours: {:.2f}, days: {:.2f}, years: {:.2f}".format(bit_128,
       sec_to_min(bit_128), sec_to_hour(bit_128), sec_to_day(bit_128), sec_to_years(bit_128)))
-print("128 bit needs 2^{:.2f} years".format(math.log(sec_to_years(bit_128), 2)))
+print("128 bit needs 2^{:.2f} years".format(math.log(sec_to_years(bit_128), 2))) 
+
+"""

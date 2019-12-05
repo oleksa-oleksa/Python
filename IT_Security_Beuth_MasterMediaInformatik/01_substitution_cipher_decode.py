@@ -167,7 +167,7 @@ decrypted_text = sort_and_reverse(detected_words, "mich", decrypted_text)
 print("Text after quadrigramss detection")
 print(decrypted_text)
 
-splitted_decrypted_text = string.split(decryptedText, " ")
+splitted_decrypted_text = decrypted_text.split(" ")
 found_chars = [' ', 'e', 't', 'h', 'w', 'a', 'o', 'f', 'i']
 
 """

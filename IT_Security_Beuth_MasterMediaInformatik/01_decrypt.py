@@ -24,20 +24,13 @@ transDict_de = {'a': "_", 'b': "_", 'c': "_", 'd': "_", 'e': "_", 'f': "_", 'g':
 
 
 def decrypt(cipher, dictionary):
-    word_text = ''
-
-    for character in cipher:
-        if character in dictionary:
-            word_text += dictionary[character]
-        else:
-            word_text += "_"
-
-    return word_text
+    return ''.join(dictionary.get(character, '_') for character in cipher)
 
 
 def make_dependencies(eng_words, word):
     for c in word:
         letters.get(c).clean_candidates()
+
     for match in eng_words:
         for index, c in enumerate(word):
             # if word is "asf" and possible match is "the":
@@ -92,6 +85,7 @@ def set_solution_for_letter(letter, solution):
                     # delete candidate
                     del other_letter.candidates[candid]
 
+                    
 def validate_requirements(tmp_word, enc_word, suggestion):
     # check if suggestion matches all requirements
     for idc, char in enumerate(suggestion):
@@ -275,7 +269,7 @@ for idx, word in enumerate(words_with_missing_letters):
     suggestions = enchant.suggest(word)
 
     # only take words that are of the same length as our word
-    suggestions = filter(lambda k: len(k) == len(word), suggestions)
+    suggestions = list(filter(lambda k: len(k) == len(word), suggestions))
     print("word " + word + " could be " + str(suggestions))
 
     # go through all suggestions

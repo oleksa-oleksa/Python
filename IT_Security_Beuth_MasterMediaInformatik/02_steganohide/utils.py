@@ -67,7 +67,7 @@ def setLastBit(pixelArray, index, bitValue):
 # https://stackoverflow.com/questions/10237926/convert-string-to-list-of-bits-and-viceversa
 def frombits(bits, type):
     chars = []
-    for bit in range(len(bits) / 8):
+    for bit in range(int(len(bits) / 8)):
         byte = bits[bit * 8: (bit + 1) * 8]
         letter = int(''.join([str(bit) for bit in byte]), 2)
         if type == 'char':

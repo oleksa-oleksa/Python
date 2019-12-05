@@ -107,7 +107,7 @@ def validate_requirements(tmp_word, enc_word, suggestion):
 
 
 def assign_letter(letter_from, letter_to):
-    print "setting " + letter_from + " to " + letter_to
+    print("setting " + letter_from + " to " + letter_to)
     transDict[letter_from] = letter_to
     letters_left.remove(letter_to)
     letters_brute_force.remove(letter_from)
@@ -166,7 +166,7 @@ for w1 in one:
 
 
 for entry in letters.values():
-    print entry.to_string()
+    print(entry.to_string())
 
 ##########################################
 # abhaengigkeiten wie 
@@ -202,7 +202,7 @@ for idx, c in enumerate(the):
     set_solution_for_letter(letters[c], "the"[idx])
 
 for entry in sorted_list:
-    print entry.to_string()
+    print(entry.to_string())
 
 print
 
@@ -216,16 +216,14 @@ for entry in sorted_list:
     transDict[entry.letter] = entry.solution
 
 print
-print cipher_with_spaces
+print(cipher_with_spaces)
 print
 decrypted = decrypt(cipher_with_spaces, transDict)
-print decrypted
+print(decrypted)
 print
-print read_file_to_string(INPUT_FILENAME)
+print(read_file_to_string(INPUT_FILENAME))
 
-print
-print "=============== PART2 : dict mapping ================="
-print
+print("=============== PART2 : dict mapping =================")
 
 letters_left = FREQUENT_LETTERS
 
@@ -248,11 +246,11 @@ for idx, word in enumerate(decrypted.split(' ')):
 words_with_missing_letters.sort(key=len, reverse=True)
 encryped_words_with_missing_letters.sort(key=len, reverse=True)
 
-print "words with missing letters: " + str(words_with_missing_letters)
-print "words with missing letters: " + str(encryped_words_with_missing_letters)
-print "Letter mapping missing: " + str(letters_brute_force)
-print " ---------------------> " + str(letters_left)
-print
+print("words with missing letters: " + str(words_with_missing_letters))
+print("words with missing letters: " + str(encryped_words_with_missing_letters))
+print("Letter mapping missing: " + str(letters_brute_force))
+print(" ---------------------> " + str(letters_left))
+
 
 
 # go through all words with blanks
@@ -272,7 +270,7 @@ for idx, word in enumerate(words_with_missing_letters):
 
     # only take words that are of the same length as our word
     suggestions = filter(lambda k: len(k) == len(word), suggestions)
-    print "word " + word + " could be " + str(suggestions)
+    print("word " + word + " could be " + str(suggestions))
 
     # go through all suggestions
     for sugg in suggestions:
@@ -285,12 +283,7 @@ for idx, word in enumerate(words_with_missing_letters):
 
 
 
-print
-print "=============== SOLUTION ================="
-print
-print 'cipher with spaces: \n', cipher_with_spaces
-print
-print 'decryped text :disco: \n', decrypt(cipher_with_spaces, transDict)
-print
-print 'given solution: \n', read_file_to_string(INPUT_FILENAME)
-print
+print("=============== SOLUTION =================")
+print('cipher with spaces: \n', cipher_with_spaces)
+print('decryped text :disco: \n', decrypt(cipher_with_spaces, transDict))
+print('given solution: \n', read_file_to_string(INPUT_FILENAME))

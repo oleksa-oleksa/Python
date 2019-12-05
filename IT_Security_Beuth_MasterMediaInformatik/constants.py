@@ -1,5 +1,5 @@
-INPUT_FILENAME = "2017_samples/sample.txt"
-OUPUT_FILENAME = "2017_samples/sample.txt_enc.txt"
+INPUT_FILENAME = "data/plaintext_english.txt"
+OUPUT_FILENAME = "data/cipertext_english.txt"
 
 FREQUENT_LETTERS = ['e', 't', 'a', 'o', 'i', 'n', 's', 'h', 'r', 'd', 'l', 'c', 'u', 'm', 'w',
                     'f', 'g', 'y', 'p', 'b', 'v', 'k', 'j', 'x', 'q', 'z']

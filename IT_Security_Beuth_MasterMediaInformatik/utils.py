@@ -7,19 +7,23 @@ def get_alphabet():
     abc.append(' ')
     return abc
 
+
 def read_file_to_string(filename):
     input_file = open(filename, 'r')
     data = input_file.read().replace('\n', ' ')
     input_file.close()
     return data
 
+
 def write_string_to_file(filename, text):
     f = open(filename, 'w')
     f.write(text)
     f.close()
 
+
 def sort(dictionary):
     return sorted(dictionary.items(), key=operator.itemgetter(1))
+
 
 
 def get_letter_frequency(text):
@@ -39,6 +43,7 @@ def get_letter_frequency(text):
     sorted_freq.reverse()
     return sorted_freq
 
+
 def get_keys(freq):
     keys = []
     for i in freq:
@@ -46,8 +51,10 @@ def get_keys(freq):
 
     return keys
 
+
 def get_words_with(number, words):
     return filter(lambda k: len(k) == number, words)
+
 
 def add_whitespace(cipher, ws_letter):
     return cipher.replace(ws_letter, ' ')

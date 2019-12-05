@@ -106,7 +106,6 @@ for letter in alphabet:
     countLetter[i] = compute_char_frequency(ciphertext, letter)
     i += 1
 
-#Beziehung zwischen Buchstabe und Häufigkeit setzen
 chars_frequency = dict(zip(alphabet, countLetter))
 
 chars_frequency_sorted = sorted(chars_frequency.items(), key=operator.itemgetter(1))

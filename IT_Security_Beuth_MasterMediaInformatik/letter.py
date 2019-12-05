@@ -11,7 +11,7 @@ class Letter:
             'a': 100, 'b': 100, 'c': 100, 'd': 100, 'e': 100, 'f': 100, 'g': 100, 'h': 100,
             'i': 100, 'j': 100, 'k': 100, 'l': 100, 'm': 100, 'n': 100, 'o': 100, 'p': 100,
             'q': 100, 'r': 100, 's': 100, 't': 100, 'u': 100, 'v': 100, 'w': 100, 'x': 100,
-            'y': 100, 'z': 100}
+            'y': 100, 'z': 100, 'ä': 100, 'ö': 100, 'ü': 100, 'ß': 100}
         self.solution = '_'
         self.score = frequency
         self.frequency = 0
@@ -55,7 +55,7 @@ class Letter:
     def add_dependency(self, to_letter, key, value):
         assert to_letter in self.candidates
 
-        #print("CAND " + to_letter + " ADD " + key + "="+ value)
+        print("CAND " + to_letter + " ADD " + key + "="+ value)
 
         dict1 = self.candidates.get(to_letter)
 
@@ -93,5 +93,5 @@ class Letter:
         #sorted_propabilaties = sorted(self.candidates_probability.items(), key=operator.itemgetter(1))[:5]
         #sorted_propabilaties = {k: '%.2f' % v for k, v in sorted_propabilaties}
         #sorted_propabilaties = sorted(sorted_propabilaties.items(), key=operator.itemgetter(1))
-
-        return "Letter: \"" + self.letter + "\" is  \"" + self.solution + "\" or could be " + string + " \n"
+        # self.set_solution(self.solution)
+        return "Letter: \"" + self.letter + "\" is  \"" + self.solution + "\" or could be " + str(list(string)) + " \n"

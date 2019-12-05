@@ -1,5 +1,6 @@
 import string
 import collections
+import copy
 
 import enchant
 
@@ -16,10 +17,11 @@ transDict = {'a': "_", 'b': "_", 'c': "_", 'd': "_", 'e': "_", 'f': "_", 'g': "_
              'q': "_", 'r': "_", 's': "_", 't': "_", 'u': "_", 'v': "_", 'w': "_", 'x': "_",
              'y': "_", 'z': "_", " ": " "}
 
+transDict_de = {'a': "_", 'b': "_", 'c': "_", 'd': "_", 'e': "_", 'f': "_", 'g': "_", 'h': "_", 'i': "_",
+             'j': "_", 'k': "_", 'l': "_", 'm': "_", 'n': "_", 'o': "_", 'p': "_", 'q': "_", 'r': "_",
+             's': "_", 't': "_", 'u': "_", 'v': "_", 'w': "_", 'x': "_", 'y': "_", 'z': "_", 'ä': "_",
+             'ö': "_", 'ü': "_", 'ß': "_", " ": " "}
 
-##########################################################################################
-########################### functions ####################################################
-##########################################################################################
 
 def decrypt(cipher, dictionary):
     word_text = ''
@@ -121,6 +123,7 @@ ciphertext = read_file_to_string(OUPUT_FILENAME)
 frequency = get_letter_frequency(ciphertext)
 
 cipher_with_spaces = add_whitespace(ciphertext, frequency[0][0])
+# cipher_with_spaces = copy.deepcopy(ciphertext)
 cipher_without_spaces = cipher_with_spaces.split(' ')
 
 freqDict = {}
@@ -145,13 +148,16 @@ for letter in alphabet:
     letters[letter] = newLetter
 #####################################
 
-words = list(set(cipher_without_spaces))
+#words = list(set(cipher_without_spaces))
+words = list(set(cipher_with_spaces))
 words.sort(key=len)
 
 ########################################
 three = get_words_with(3, words)
 two = get_words_with(2, words)
-one = get_words_with(1, words)
+
+# one letter words don't exist in german language
+# one = get_words_with(1, words)
 
 
 for w3 in three:
@@ -160,8 +166,8 @@ for w3 in three:
 for w2 in two:
     make_dependencies(TWO_LETTER_WORDS, w2)
 
-for w1 in one:
-    make_dependencies(ONE_LETTER_WORDS, w1)
+# for w1 in one:
+#    make_dependencies(ONE_LETTER_WORDS, w1)
 ##########################################
 
 
@@ -285,5 +291,5 @@ for idx, word in enumerate(words_with_missing_letters):
 
 print("=============== SOLUTION =================")
 print('cipher with spaces: \n', cipher_with_spaces)
-print('decryped text :disco: \n', decrypt(cipher_with_spaces, transDict))
+print('decryped text: \n', decrypt(cipher_with_spaces, transDict))
 print('given solution: \n', read_file_to_string(INPUT_FILENAME))

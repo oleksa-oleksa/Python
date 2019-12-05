@@ -1,5 +1,6 @@
 import operator
 import string
+from constants import ALPHABET
 
 def get_alphabet():
     #abc = [chr(a+97) for a in range(26)]
@@ -28,15 +29,18 @@ def sort(dictionary):
 
 def get_letter_frequency(text):
     letter_frequency = dict()
-    alphabet = get_alphabet()
 
     #init all values with zero
-    for letter in alphabet:
+    for letter in ALPHABET:
         letter_frequency[letter] = 0
+        letter_frequency.update({' ': 0})
 
     #increment the specific value to get a first overview about the letter frequency
     for letter in text:
-        letter_frequency[letter] += 1
+        if letter == ' ':
+            letter_frequency[' '] += 1
+        else:
+            letter_frequency[letter] += 1
 
     # sort the frequency array
     sorted_freq = sort(letter_frequency)
@@ -53,7 +57,7 @@ def get_keys(freq):
 
 
 def get_words_with(number, words):
-    return filter(lambda k: len(k) == number, words)
+    return list(filter(lambda k: len(k) == number, words))
 
 
 def add_whitespace(cipher, ws_letter):

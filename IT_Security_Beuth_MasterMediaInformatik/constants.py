@@ -40,12 +40,26 @@ THREE_LETTER_WORDS_DE = ['die', 'der', 'und', 'den', 'das', 'von', 'sie',
 
 ONE_LETTER_WORDS = ['a', 'i']
 
-TWO_LETTER_WORDS = ['he', 'at', 'it', 'if', 'in', 'is',
+TWO_LETTER_WORDS = ['of','to','in', 'if', 'on', 'be', 'by', 'as', 'at', 'it', 'an', 'or',
+                    'he', 'up', 'no', 'we', 'is', 'so', 'do', 'co', 'pc', 'go', 'my', 'mr', 'us', 'me']
+
+THREE_LETTER_WORDS = ['the','and','for','was','are','has','its','not','but','can','his','had','who','one','you','new','all','two','out','use','any','may','now','per','her',
+'she','say','get','way','our','set','off','how','him','end','own','did','day','see','too','few','run','ago','oil',
+'pay','six','put','law','far','tax','big','buy','dos','top','due','lot','cut','low','got','job','net','key','war','old','yet','man','mac','gas','lan','car','air','led','ram',
+'men','won','via','let','hit','try','why','los','add','aid','dec','pcs','box','bad','sun','met','sub',
+'bus','sen','saw','oct','age','jan','ltd','act','win','dow','bit','sql','sup','aug','fax','rep', 'bay', 'fly',
+'sir', 'boy', 'eye', 'gap', 'sea', 'dry', 'map', 'sit', 'sex', 'guy', 'bed', 'fox', 'raw', 'yes', 'lay','usa','ice','dog','eat',
+'abu', 'maj', 'ups', 'bug', 'irm', 'cga', 'ppm', 'mae', 'pad', 'sue', 'sas', 'max', 'sky', 'cdc', 'pie', 'isa', 'kid', 'ind', 'sad', 'ala', 'bbc',
+'ocr', 'ton', 'wis', 'bbs', 'ins', 'uss', 'mrs', 'cox', 'tea', 'adp', 'cry', 'atm', 'mnp', 'ski', 'gdp', 'usx', 'cds', 'mar', 'pin', 'wsj',
+'rip', 'ian', 'kgb', 'iso', 'gay', 'fig', 'icl', 'uaw', 'erm', 'ipx', 'spy', 'cam', 'egg', 'ftc', 'pcx', 'ace', 'cms',
+'esa', 'kan', 'trw', 'hat', 'ami', 'rdb', 'min', 'mhs', 'pet', 'des', 'cup', 'sdi', 'rod', 'ear', 'rtc', 'eec', 'var', 'eps']
+
+TWO_LETTER_WORDS_OLD = ['of', 'he', 'at', 'it', 'if', 'in', 'is',
                     'on', 'to', 'do', 'go', 'of', 'an',
                     'so', 'of', 'up', 'as', 'my', 'me',
                     'be', 'as', 'or', 'we', 'by', 'no', 'am', 'us']
 
-THREE_LETTER_WORDS = ['the', 'and', 'for', 'are', 'but', 'not', 'you', 'all', 'any',
-                      'can', 'had', 'her', 'was', 'one', 'our', 'out', 'day', 'get',
-                      'has', 'him', 'his', 'how', 'man', 'new', 'now', 'old', 'see', 'two',
+THREE_LETTER_WORDS_OLD = ['the', 'and', 'for', 'are', 'but', 'not', 'you', 'all', 'any',
+                      'can', 'has', 'her', 'was', 'one', 'our', 'out', 'day', 'get',
+                      'had', 'him', 'his', 'how', 'man', 'new', 'now', 'old', 'see', 'two',
                       'way', 'who', 'boy', 'did', 'its', 'let', 'put', 'say', 'too', 'use']

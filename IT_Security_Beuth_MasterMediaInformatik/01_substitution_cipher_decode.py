@@ -152,24 +152,24 @@ print("Text after syllables detection")
 print(decrypted_text)
 
 detected_words = count_digrams(decrypted_text)
-decrypted_text = sort_and_reverse(detected_words, "en", decrypted_text)
+decrypted_text = sort_and_reverse(detected_words, "of", decrypted_text)
 print("Text after digrams detection")
 print(decrypted_text)
 
 detected_words = count_trigrams(decrypted_text)
-decrypted_text = sort_and_reverse(detected_words, "ich", decrypted_text)
+decrypted_text = sort_and_reverse(detected_words, "the", decrypted_text)
 print("Text after trigrams detection")
 print(decrypted_text)
 
 detected_words = count_quadrigrams(decrypted_text)
-decrypted_text = sort_and_reverse(detected_words, "mich", decrypted_text)
+decrypted_text = sort_and_reverse(detected_words, "that", decrypted_text)
 print("Text after quadrigramss detection")
 print(decrypted_text)
 
 splitted_decrypted_text = decrypted_text.split(" ")
 found_chars = [' ', 'e', 't', 'h', 'w', 'a', 'o', 'f', 'i']
 
-"""
+
 print("Dictonary check:")
 stopper = 0
 for x in range(0, len(splitted_decrypted_text)):
@@ -212,11 +212,11 @@ for x in range(0, len(splitted_decrypted_text)):
     if stopper == 50:
         break
 
-print decryptedText
+print(decrypted_text)
 
 
-print "\nAusgabe nach PyEnchant-Check: "
-wordsWithUnknownLetter = getWordsWithUnknownLetter(decryptedText, foundChars)
+print("PyEnchant-Check: ")
+wordsWithUnknownLetter = get_words_with_unknown_letter(decryptedText, foundChars)
 enchantUS = enchant.Dict("en_US")
 
 #Alle Wörter rausschmeissen von den alle befindlichen Buchstaben bekannt sind
@@ -234,7 +234,7 @@ for word in removeWords:
     if word in wordsWithUnknownLetter:
         wordsWithUnknownLetter.remove(word)
 
-wordsWithUnknownLetter = getWordsWithUnknownLetter(decryptedText, foundChars)
+wordsWithUnknownLetter = get_words_with_unknown_letter(decryptedText, foundChars)
 finished = False
 
 #mit PyEnchant die letzten Wörter rausfinden und mit dem Text abgleichen
@@ -250,12 +250,12 @@ if len(wordsWithUnknownLetter) > 0:
                         if letter not in foundChars:
                             foundChars.append(letter)
                             index = decryptedText.find(letter)
-                            tmpDecryptedText = replaceWords(wordsWithUnknownLetter[0], result, decryptedText)
+                            tmpDecryptedText = replace_words(wordsWithUnknownLetter[0], result, decryptedText)
                             decryptedText[index]
                             if tmpDecryptedText[index] not in foundChars:
                                 foundChars.append(decryptedText[index])
                                 decryptedText = tmpDecryptedText
-                                wordsWithUnknownLetter = getWordsWithUnknownLetter(decryptedText, foundChars)
+                                wordsWithUnknownLetter = get_words_with_unknown_letter(decryptedText, foundChars)
                             if len(wordsWithUnknownLetter) == 0:
                                 finished = True
         if len(wordsWithUnknownLetter) > 0:
@@ -265,7 +265,7 @@ if len(wordsWithUnknownLetter) > 0:
                 if len(wordsWithUnknownLetter) == 0:
                     finished = True
 
-print decryptedText
+print(decrypted_text)
 
 fobj = open("plainText_decoded_01.txt")
 plainText = ""
@@ -273,6 +273,5 @@ for line in fobj:
     plainText += line.rstrip()
 fobj.close()
 
-print "\nORIGINAL-TEXT:"
-print plainText
-"""
+print("\nORIGINAL-TEXT:")
+print(plainText)

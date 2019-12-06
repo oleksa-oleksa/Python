@@ -25,7 +25,7 @@ random.shuffle(shuffled_abc)
 dict_german = dict(zip(alphabet, shuffled_abc))
 
 # Open and read sample text
-f = open("plaintext_01.txt")
+f = open("data/plaintext_english.txt")
 raw_text = ""
 for line in f:
     raw_text += line.rstrip()

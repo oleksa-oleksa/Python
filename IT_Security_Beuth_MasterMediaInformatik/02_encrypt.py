@@ -3,7 +3,7 @@ import random
 from utils import get_alphabet, read_file_to_string, write_string_to_file
 from constants import INPUT_FILENAME, OUPUT_FILENAME, ALPHABET
 
-extra_symbols = [',', '.', ':', '-', '#', '!', '?', '€', '$', ';', "'", '"', '(', ')', '=']
+extra_symbols = [',', '.', ':', '-', '#', '!', '?', '€', '$', ';', "'", "’", '(', ')', '=']
 
 alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
             'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'ä', 'ö', 'ü', 'ß']

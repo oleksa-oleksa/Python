@@ -286,4 +286,4 @@ for idx, word in enumerate(words_with_missing_letters):
 print("=============== SOLUTION =================")
 print('cipher with spaces: \n', cipher_with_spaces)
 print('decryped text: \n', decrypt(cipher_with_spaces, transDict))
-print('given solution: \n', read_file_to_string(INPUT_FILENAME))
+print('original: \n', read_file_to_string(INPUT_FILENAME))

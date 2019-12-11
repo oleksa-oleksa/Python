@@ -43,9 +43,10 @@ def get_letter_frequency(text):
             letter_frequency[letter] += 1
 
     # sort the frequency array
-    sorted_freq = sort(letter_frequency)
-    sorted_freq.reverse()
-    return sorted_freq
+    #sorted_freq = sort(letter_frequency)
+    #sorted_freq.reverse()
+    #return sorted_freq
+    return letter_frequency
 
 
 def get_keys(freq):

@@ -116,17 +116,20 @@ def assign_letter(letter_from, letter_to):
 ciphertext = read_file_to_string(OUPUT_FILENAME)
 frequency = get_letter_frequency(ciphertext)
 
-cipher_with_spaces = add_whitespace(ciphertext, frequency[0][0])
+#cipher_with_spaces = add_whitespace(ciphertext, frequency[0][0])
 # cipher_with_spaces = copy.deepcopy(ciphertext)
-cipher_without_spaces = cipher_with_spaces.split(' ')
+cipher_without_spaces = ciphertext.split(' ')
 
 freqDict = {}
-frequency2 = get_letter_frequency(cipher_with_spaces.replace(' ', ''))
-letters_total = len(cipher_with_spaces.replace(' ', ''))
+frequency2 = get_letter_frequency(ciphertext.replace(' ', ''))
+print(frequency2)
+del frequency2[" "]
+letters_total = len(ciphertext.replace(' ', ''))
 
 
 for letter, score in frequency2:
     freqDict[letter] = (score / float(letters_total)) * 100
+    print(freqDict)
 
 del freqDict[' ']
 

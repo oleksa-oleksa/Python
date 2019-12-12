@@ -3,22 +3,19 @@ from utils import *
 
 # used http://code.activestate.com/recipes/496737/
 
-XTEA_DELTA = 0x9e3779b9L
-MASK = 0xffffffffL
+XTEA_DELTA = 0x9e3779b9
+MASK = 0xffffffff
 
 
 def xor_block_enc(password, iv, content, rounds):
     enc = encipher(password, content, rounds)
     result = sxor(enc, iv)
-    # print("ENC " + str(password) + " | iv = " + str(iv) + " | content = " + str(content) + " | enc = " + str(enc) + " | result = " + str(result))
-
     return result
 
 
 def xor_block_dec(password, iv, content, rounds):
     unxor = sxor(content, iv)
     result = decipher(password, unxor, rounds)
-    # print("DEC " + str(password) + " | iv = " + str(iv) + " | content = " + str(content) + " | dec = " + str(unxor) + " | result = " + str(result))
     return result
 
 
@@ -40,7 +37,7 @@ def crypt(password, content, iv, rounds=32, mode='CFB', enc=True):
     roundedContent = int(8 * round(float(len(content))/8))
 
     result = []
-    for i in range(roundedContent / BYTE_OFFSET):
+    for i in range(roundedContent // BYTE_OFFSET):
         block = content[i * 8:i * 8 + 8]
         # block = content[i * 8:(i+1) * 8]
 
@@ -54,14 +51,14 @@ def crypt(password, content, iv, rounds=32, mode='CFB', enc=True):
             result.append(xor_block_dec(password, iv, block, rounds))
             iv = block
 
-    return "".join(result)
+    return b"".join(result)
 
 
 def encipher(password, block, num_rounds):
     v0, v1 = struct.unpack("!2L", block)
     k = struct.unpack("!4L", password)
 
-    sum_value = 0L
+    sum_value = 0
 
     for r in range(num_rounds):
         v0 = (v0 + (((v1 << 4 ^ v1 >> 5) + v1) ^ (sum_value + k[sum_value & 3]))) & MASK

@@ -67,7 +67,7 @@ def setLastBit(pixelArray, index, bitValue):
 # https://stackoverflow.com/questions/10237926/convert-string-to-list-of-bits-and-viceversa
 def frombits(bits, type):
     chars = []
-    for bit in range(int(len(bits) / 8)):
+    for bit in range(len(bits) // 8):
         byte = bits[bit * 8: (bit + 1) * 8]
         letter = int(''.join([str(bit) for bit in byte]), 2)
         if type == 'char':
@@ -76,7 +76,7 @@ def frombits(bits, type):
         chars.append(letter)
 
     if type == 'char':
-        return ''.join(chars)
+        return bytearray(map(ord, chars))
     else:
         return int(''.join(map(str, chars)))
 
@@ -109,7 +109,7 @@ def get_content_len(content):
     content_len = len(content)
     # from 1245 -> '1245' -> [1,2,4,5]
     splitted_content_len = map(int, str(content_len))
-    return splitted_content_len
+    return list(splitted_content_len)
 
 
 # Returns the contents of an image as a
@@ -133,7 +133,7 @@ def setSecretImage(size, pixel, output):
 
 
 def write_string_to_file(filename, text):
-    f = open(filename, 'w')
+    f = open(filename, 'wb')
     f.write(text)
     f.close()
 
@@ -150,4 +150,4 @@ def sxor(s1, s2):
     # perform exclusive or on the ASCII code
     # then convert the result back to ASCII (chr)
     # merge the resulting array of characters as a string
-    return ''.join(chr(ord(a) ^ ord(b)) for a, b in zip(s1, s2))
+    return bytes((a ^ b) for a, b in zip(s1, s2))

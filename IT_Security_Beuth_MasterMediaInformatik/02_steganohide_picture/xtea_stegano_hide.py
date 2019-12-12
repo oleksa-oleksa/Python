@@ -8,7 +8,7 @@ from utils import *
 arguments = sys.argv
 # overwrite arguments to test the program without arguments
 arguments += ["mac_password", "-k", "xtea_password",
-              "resources/text.txt", "resources/bild.bmp"]
+              "text.txt", "bild.bmp"]
 # arguments = ["text.txt", "todd.bmp"]
 
 
@@ -36,14 +36,20 @@ def storeContentInImage(pixel, content, content_len):
 
     newPixel = pixel
 
+    while len(content_len) < 4:
+        content_len.insert(0, 0)
+
     # store the conten-len in image
     for idx, value in enumerate(content_len):
         byteIndex = BYTE_OFFSET * idx
         myBinary = getBinary(value)
+
         for x in range(0, len(myBinary)):
             newValue = setLastBit(pixel, byteIndex + x, int(myBinary[x]))
             newPixel[byteIndex + x] = newValue
 
+        
+            
     # iterate over all bits which should be written
     for idx, value in enumerate(content):
         # calculate the start position of the byte which should be written
@@ -67,8 +73,8 @@ def storeContentInImage(pixel, content, content_len):
 
 def run_xtea(password, content, mode_encode=True):
     passhash = generate_key(password)
-    iv = passhash[len(passhash) - BYTE_OFFSET:]
-    password = passhash[48:]
+    iv = bytes(passhash[len(passhash) - BYTE_OFFSET:], 'utf-8')
+    password = bytes(passhash[48:], 'utf-8')
     return xtea.crypt(password, content, iv, mode='CFB', enc=mode_encode)
 
 
@@ -78,7 +84,7 @@ def createImage(mac_key, xtea_pass):
     stringtext = getStringFromText(INPUT_TEXT)
 
     # get the content to write
-    contentText = mac_key + stringtext
+    contentText = bytes(mac_key + stringtext, 'utf-8')
 
     # XTEA encode
     encrypted = run_xtea(xtea_pass, contentText)
@@ -86,7 +92,7 @@ def createImage(mac_key, xtea_pass):
     # encrypted text in numbers
     number_string = []
     for c in encrypted:
-        number_string.append(ord(c))
+        number_string.append(c)
 
     # get the text-len in bytes [1, 2, 4, 5]
     text_len = get_content_len(number_string)
@@ -110,8 +116,6 @@ def readContentFromXTEAImage(pixelArray, hash_key, xtea_pw):
                 lengtArray.append(length[7])
 
         content_length = frombits(lengtArray, 'int')
-        print("len = " + str(content_length))
-
         content_length = content_length * BYTE_OFFSET + HEADER_OFFSET
 
         for idx, pixel in enumerate(pixelArray):
@@ -120,7 +124,7 @@ def readContentFromXTEAImage(pixelArray, hash_key, xtea_pw):
                 contentArray.append(pixelBinary[7])
 
         content = frombits(contentArray, 'char')
-
+        
         # XTEA decode
         xtea_dec = run_xtea(xtea_pw, content, mode_encode=False)
 
@@ -131,7 +135,7 @@ def readContentFromXTEAImage(pixelArray, hash_key, xtea_pw):
         print("content = " + str(content))
         return content
     else:
-        print "ERROR ERROR ERROR!"
+        print("ERROR ERROR ERROR!")
 
 
 def testImage(hash_key, xtea_pw):
@@ -140,7 +144,7 @@ def testImage(hash_key, xtea_pw):
     # read the content in the pixels
     steContent = readContentFromXTEAImage(steImage, hash_key, xtea_pw)
 
-    write_string_to_file('resources/text.txt_restored.txt', steContent)
+    write_string_to_file('text.txt_restored.txt', steContent)
 
 
 def encode(mac_password, xtea_pw):

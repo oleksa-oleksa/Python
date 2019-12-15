@@ -157,7 +157,7 @@ three = get_words_with(3, words)
 two = get_words_with(2, words)
 
 # one letter words don't exist in german language
-# one = get_words_with(1, words)
+one = get_words_with(1, words)
 
 
 for w3 in three:
@@ -175,7 +175,7 @@ for entry in letters.values():
     print(entry.to_string())
 
 ##########################################
-# abhaengigkeiten wie
+# abhaengigkeiten wie 
 # c = l wenn w = l
 # loeschen
 for l in letters:

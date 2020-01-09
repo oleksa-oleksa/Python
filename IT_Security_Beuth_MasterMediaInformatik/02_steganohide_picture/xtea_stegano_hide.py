@@ -7,8 +7,9 @@ from utils import *
 
 arguments = sys.argv
 # overwrite arguments to test the program without arguments
-arguments += ["mac_password", "-k", "xtea_password",
-              "text.txt", "bild.bmp"]
+# arguments += ["mac_password_newJanuar2020", "-k", "xtea_password", "text.txt", "bild.bmp"]
+
+arguments += ["newMAC_afterExam", "-k", "xtea_password", "text.txt", "bild.bmp"]
 # arguments = ["text.txt", "todd.bmp"]
 
 
@@ -19,14 +20,28 @@ INPUT_IMAGE = arguments[6]
 # bild.bmp.ste
 OUTPUT = arguments[6] + ".sae.bmp"
 
+MAC_ENCODE = arguments[2]
+MAC_DECODE = arguments[2]
+
 
 def main():
     if arguments[1] == "-e":
         encode(arguments[2], arguments[4])
     elif arguments[1] == "-d":
         decode(arguments[2], arguments[4])
+        test_mac_password()
+
     else:
         print("ERROR")
+
+
+def test_mac_password():
+    global MAC_ENCODE
+    global MAC_DECODE
+    if MAC_ENCODE == MAC_DECODE:
+        print("MAC_ENCODE == MAC_DECODE, Message is correct")
+    else:
+        print("MAC_ENCODE != MAC_DECODE, Message is NOT correct!")
 
 
 def storeContentInImage(pixel, content, content_len):
@@ -148,13 +163,17 @@ def testImage(hash_key, xtea_pw):
 
 
 def encode(mac_password, xtea_pw):
+    global MAC_ENCODE
     hash_key = generate_key(mac_password)
     createImage(hash_key, xtea_pw)
+    MAC_ENCODE = hash_key
 
 
 def decode(mac_password, xtea_pw):
+    global MAC_DECODE
     hash_key = generate_key(mac_password)
     testImage(hash_key, xtea_pw)
+    MAC_DECODE = hash_key
     return ""
 
 

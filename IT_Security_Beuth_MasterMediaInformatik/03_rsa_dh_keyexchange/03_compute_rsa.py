@@ -6,10 +6,10 @@ import math
 TASK 1: 
 Diffie-Hellmann Keyexchange
 """
-p = 467
-g = 2
+p = 67
+g = 3
 
-secret_a_b = [(2, 5), (400, 134), (228, 57)]
+secret_a_b = [(13, 17), (400, 134), (228, 57)]
 A = 0
 B = 0
 

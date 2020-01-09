@@ -141,6 +141,7 @@ def write_string_to_file(filename, text):
 def generate_key(mac_passwd):
     sha256 = hashlib.sha256()
     sha256.update(mac_passwd.encode('utf-8'))
+    print("sha256.HEX = ", sha256.hexdigest())
     return sha256.hexdigest()
 
 

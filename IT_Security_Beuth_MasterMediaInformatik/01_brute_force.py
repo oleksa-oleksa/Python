@@ -39,9 +39,9 @@ for length in keyLength:
     maxTries = float(2 ** length)
     avgTries = float(maxTries / 2)
 
-    maxSeconds = maxTries / float(speed_dev)
-    avgSeconds = avgTries / float(speed_dev)
-    minSeconds = float(1 / float(speed_dev))
+        maxSeconds = maxTries / float(speed_dev)
+        avgSeconds = avgTries / float(speed_dev)
+        minSeconds = float(1 / float(speed_dev))
 
     print("Minimum: \n    1 try.")
     print("    " + '{:30f}'.format(minSeconds) + " (a very small fraction of a second) \n")

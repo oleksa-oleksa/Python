@@ -16,8 +16,8 @@ def split(X,Y):
     rstate = numpy.random.mtrand.RandomState(2345)
 
     R = rstate.permutation(n)
-    Rtrain = R[:n/2]
-    Rtest  = R[n/2:]
+    Rtrain = R[:n//2]
+    Rtest  = R[n//2:]
 
     Xtrain = X[Rtrain] # Training data
     Ytrain = Y[Rtrain] # Training targets

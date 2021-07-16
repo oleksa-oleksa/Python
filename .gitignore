@@ -12,3 +12,4 @@ __init__.py
 migrations
 static_cdn_test
 .ipynb_checkpoints/
+**/datasets

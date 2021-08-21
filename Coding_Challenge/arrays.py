@@ -7,7 +7,7 @@ This is LeetCode's official curated list of Top classic interview question
 
 class Solution:
     @staticmethod
-    def remove_duplicates(self, nums: List[int]) -> int:
+    def remove_duplicates(nums: List[int]) -> int:
         """
             Remove Duplicates from Sorted Array
 
@@ -53,10 +53,10 @@ class Solution:
                 nums[slow] = nums[fast]
         return slow + 1
 
-######################################################################
+#################################################################
 
     @staticmethod
-    def max_profit(self, prices: List[int]) -> int:
+    def max_profit(prices: List[int]) -> int:
         """
         You are given an array prices where prices[i]
         is the price of a given stock on the i_th day.
@@ -79,3 +79,28 @@ class Solution:
                 profit = delta
             slow += 1
         return profit
+
+#################################################################
+
+    @staticmethod
+    def rotate(nums: List[int], k: int) -> None:
+        """
+        Given an array, rotate the array to the right by k steps, where k is non-negative.
+        Do not return anything, modify nums in-place instead.
+        """
+
+        if not nums:
+            return []
+        if len(nums) == 1:
+            return nums
+        if k == 0:
+            return nums
+
+        while k > len(nums):
+            k = k - len(nums)
+
+        head = nums[-k:]
+        tail = nums[:-k]
+
+        nums[:-k] = head
+        nums[-k:] = tail

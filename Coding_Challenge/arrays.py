@@ -124,10 +124,18 @@ class Solution:
         return False
 
     @staticmethod
-    def contains_duplicate_v2(self, nums: List[int]) -> bool:
-        """ It's not mine but very fast solution and I want to keep it for educational purpose"""
+    def contains_duplicate_fast_set(self, nums: List[int]) -> bool:
+        """ Very fast solution (not mine) and I want to keep it for educational purpose"""
         visited = set()
         for i in nums:
             if i in visited:
                 return True
             visited.add(i)
+
+    @staticmethod
+    def contains_duplicate_full_slow_set(self, nums: List[int]) -> bool:
+        """Another solution from leetcode, as a previous is made using set but os very slow.
+        The difference is that set is created from from the whole List:
+        Converting a list to a set requires that every item in the list be visited once, O(n).
+        Inserting an element into a set is O(1), so the overall time complexity would be O(n)."""
+        return len(nums) != len(set(nums))

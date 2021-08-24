@@ -104,3 +104,30 @@ class Solution:
 
         nums[:-k] = head
         nums[-k:] = tail
+
+    @staticmethod
+    def contains_duplicate(self, nums: List[int]) -> bool:
+        """
+        Given an integer array nums, return true
+        if any value appears at least twice in the array,
+        and return false if every element is distinct.
+        """
+        if not nums:
+            return False
+        nums.sort()
+        if len(nums) == 1:
+            return False
+
+        for i in range(1, len(nums)):
+            if nums[i - 1] == nums[i]:
+                return True
+        return False
+
+    @staticmethod
+    def contains_duplicate_v2(self, nums: List[int]) -> bool:
+        """ It's not mine but very fast solution and I want to keep it for educational purpose"""
+        visited = set()
+        for i in nums:
+            if i in visited:
+                return True
+            visited.add(i)

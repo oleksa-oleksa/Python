@@ -1,4 +1,6 @@
 from typing import List
+from collections import Counter
+
 """
 This is LeetCode's official curated list of Top classic interview question
 
@@ -189,18 +191,31 @@ class Solution:
 
     """
     @staticmethod
-    def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
+    def intersect(nums1: List[int], nums2: List[int]) -> List[int]:
         if not nums1 or not nums2:
             return False
         if len(nums1) == 1 and len(nums2) == 1:
             if nums1[0] == nums2[0]:
                 return nums1
 
-        if len(nums1) < len(nums2):
-            short = nums1
-            long = nums2
-        else:
-            short = nums2
-            long = nums1
+        intersection = list()
 
-        return [x for x in short if x in long]
+        for x in nums1:
+            if x in nums2:
+                nums2.remove(x)
+                intersection.append(x)
+        return intersection
+
+
+    @staticmethod
+    def intersect_counter(nums1: List[int], nums2: List[int]) -> List[int]:
+        """ Very fast solution (not mine) and I want to keep it for educational purpose"""
+        c = dict(Counter(nums1))
+
+        res = []
+        for e in nums2:
+            if e in c and c[e] > 0:
+                c[e] -= 1
+                res.append(e)
+
+        return res

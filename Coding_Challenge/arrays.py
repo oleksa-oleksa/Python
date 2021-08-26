@@ -180,3 +180,27 @@ class Solution:
                 visited.remove(i)
 
         return visited.pop()
+
+#################################################################
+    """
+    Given two integer arrays nums1 and nums2, return an array of their intersection. 
+    Each element in the result must appear as many times as it shows in both arrays 
+    and you may return the result in any order.
+
+    """
+    @staticmethod
+    def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        if not nums1 or not nums2:
+            return False
+        if len(nums1) == 1 and len(nums2) == 1:
+            if nums1[0] == nums2[0]:
+                return nums1
+
+        if len(nums1) < len(nums2):
+            short = nums1
+            long = nums2
+        else:
+            short = nums2
+            long = nums1
+
+        return [x for x in short if x in long]

@@ -68,16 +68,31 @@ class Solution:
         if not prices:
             return 0
 
-        min_price = 0
-        max_price = 0
-        slow = 0
+        min_price = prices[0]
+        max_price = prices[0]
+        min_index = 0
+        max_index = 0
         profit = 0
 
-        for fast in range(1, len(prices)):
-            delta = prices[fast] - prices[slow]
-            if delta > profit:
-                profit = delta
-            slow += 1
+        for index, price in enumerate(prices):
+            if price < max_price:
+                min_price = price
+                min_index = index
+
+            if price >= min_price:
+                max_price = price
+                max_index = index
+
+            if max_index > min_index:
+                delta = max_price - min_price
+                profit += delta
+
+                # reset pointers
+                min_price = price
+                max_price = price
+                min_index = index
+                max_index = index
+
         return profit
 
 #################################################################
@@ -113,8 +128,10 @@ class Solution:
         and return false if every element is distinct.
         """
         if not nums:
-            return False
+            return
+
         nums.sort()
+
         if len(nums) == 1:
             return False
 
@@ -139,3 +156,27 @@ class Solution:
         Converting a list to a set requires that every item in the list be visited once, O(n).
         Inserting an element into a set is O(1), so the overall time complexity would be O(n)."""
         return len(nums) != len(set(nums))
+
+#################################################################
+    @staticmethod
+    def single_number(self, nums: List[int]) -> int:
+        """
+        Given a non-empty array of integers nums,
+        every element appears twice except for one.
+        Find that single one.
+
+        """
+        if not nums:
+            return False
+        if len(nums) == 1:
+            return nums[0]
+
+        visited = set()
+
+        for i in nums:
+            if i not in visited:
+                visited.add(i)
+            else:
+                visited.remove(i)
+
+        return visited.pop()

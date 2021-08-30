@@ -279,9 +279,7 @@ class Solution:
             if nums[right] == 0:
                 right += 1
             else:
-                tmp = nums[left]
-                nums[left] = nums[right]
-                nums[right] = tmp
+                nums[left], nums[right] = nums[right], nums[left]
                 right += 1
                 left += 1
 

@@ -253,3 +253,37 @@ class Solution:
         digit_list = list(digit_map)
 
         return digit_list
+
+    #################################################################
+    """
+    Move all the 0's to the end of array.
+    All the non-zero elements must retain their original order.
+    
+    Both the requirements are mutually exclusive, 
+    i.e., you can solve the individual sub-problems and then 
+    combine them for the final solution."""
+
+    def move_zeroes(nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        if not nums:
+            return False
+        if len(nums) == 1:
+            return nums[0]
+
+        left = 0
+        right = 0
+
+        while right < len(nums):
+            if nums[right] == 0:
+                right += 1
+            else:
+                tmp = nums[left]
+                nums[left] = nums[right]
+                nums[right] = tmp
+                right += 1
+                left += 1
+
+
+

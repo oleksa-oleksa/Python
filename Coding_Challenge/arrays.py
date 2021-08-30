@@ -237,13 +237,15 @@ class Solution:
         num = 0
         power = 1
 
-        # obtain represented posotive number from a list
+        # obtain represented positive number from a list
         for i in range(len(digits) - 1, -1, -1):
             num += (digits[i] % 10) * power
             power *= 10
 
+        # increment
         num += 1
 
+        # convert back into list
         digit_string = str(num)
         # Convert each character of `digit_string` to an integer.
         digit_map = map(int, digit_string)

@@ -283,5 +283,28 @@ class Solution:
                 right += 1
                 left += 1
 
+    #################################################################
+    """
+    You are given an array of positive numbers from 1 to n, 
+    such that all numbers from 1 to n are present except one number x. 
+    You have to find x. The input array is not sorted.
+    
+    Find the sum sum_of_elements of all the numbers in the array. 
+    This would require a linear scan, O(n).
+    
+    Then find the sum expected_sum of first n numbers 
+    using the arithmetic series sum formula
+    
+    The difference between these i.e. expected_sum - sum_of_elements, 
+    is the missing number in the array.
+    """
 
+    def find_missing(input):
+        # calculate sum of all elements
+        # in input list
+        sum_of_elements = sum(input)
 
+        # There is exactly 1 number missing
+        n = len(input) + 1
+        actual_sum = (n * (n + 1)) / 2
+        return actual_sum - sum_of_elements

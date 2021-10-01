@@ -184,14 +184,14 @@ class Solution:
         return visited.pop()
 
 #################################################################
-    """
-    Given two integer arrays nums1 and nums2, return an array of their intersection. 
-    Each element in the result must appear as many times as it shows in both arrays 
-    and you may return the result in any order.
-
-    """
     @staticmethod
     def intersect(nums1: List[int], nums2: List[int]) -> List[int]:
+        """
+            Given two integer arrays nums1 and nums2, return an array of their intersection.
+            Each element in the result must appear as many times as it shows in both arrays
+            and you may return the result in any order.
+
+        """
         if not nums1 or not nums2:
             return False
         if len(nums1) == 1 and len(nums2) == 1:
@@ -205,7 +205,6 @@ class Solution:
                 nums2.remove(x)
                 intersection.append(x)
         return intersection
-
 
     @staticmethod
     def intersect_counter(nums1: List[int], nums2: List[int]) -> List[int]:
@@ -221,16 +220,17 @@ class Solution:
         return res
 
     #################################################################
-    """Given a non-empty array of decimal digits representing a non-negative integer, 
-    increment one to the integer.
-    
-    The digits are stored such that the most significant digit is at the head of the list, 
-    and each element in the array contains a single digit.
-    
-    You may assume the integer does not contain any leading zero, except the number 0 itself.   
-    """
+
     @staticmethod
     def plus_one(digits: List[int]) -> List[int]:
+        """Given a non-empty array of decimal digits representing a non-negative integer,
+         increment one to the integer.
+
+         The digits are stored such that the most significant digit is at the head of the list,
+         and each element in the array contains a single digit.
+
+         You may assume the integer does not contain any leading zero, except the number 0 itself.
+         """
         if not digits:
             return
 
@@ -255,18 +255,16 @@ class Solution:
         return digit_list
 
     #################################################################
-    """
-    Move all the 0's to the end of array.
-    All the non-zero elements must retain their original order.
-    
-    Both the requirements are mutually exclusive, 
-    i.e., you can solve the individual sub-problems and then 
-    combine them for the final solution."""
 
     @staticmethod
     def move_zeroes(nums: List[int]) -> None:
         """
-        Do not return anything, modify nums in-place instead.
+        Move all the 0's to the end of array.
+        All the non-zero elements must retain their original order.
+
+        Both the requirements are mutually exclusive,
+        i.e., you can solve the individual sub-problems and then
+        combine them for the final solution.
         """
         if not nums:
             return False
@@ -285,23 +283,23 @@ class Solution:
                 left += 1
 
     #################################################################
-    """
-    You are given an array of positive numbers from 1 to n, 
-    such that all numbers from 1 to n are present except one number x. 
-    You have to find x. The input array is not sorted.
-    
-    Find the sum sum_of_elements of all the numbers in the array. 
-    This would require a linear scan, O(n).
-    
-    Then find the sum expected_sum of first n numbers 
-    using the arithmetic series sum formula
-    
-    The difference between these i.e. expected_sum - sum_of_elements, 
-    is the missing number in the array.
-    """
 
     @staticmethod
     def find_missing(nums):
+        """
+         You are given an array of positive numbers from 1 to n,
+         such that all numbers from 1 to n are present except one number x.
+         You have to find x. The input array is not sorted.
+
+         Find the sum sum_of_elements of all the numbers in the array.
+         This would require a linear scan, O(n).
+
+         Then find the sum expected_sum of first n numbers
+         using the arithmetic series sum formula
+
+         The difference between these i.e. expected_sum - sum_of_elements,
+         is the missing number in the array.
+        """
         # calculate sum of all elements
         # in input list
         sum_of_elements = sum(nums)
@@ -312,24 +310,25 @@ class Solution:
         return actual_sum - sum_of_elements
 
     #################################################################
-    """
-    Given an array of integers and a value, determine if there are any two integers 
-    in the array whose sum is equal to the given value. Return true if the sum exists 
-    and return false if it does not.
-    
-    Scan the whole array once and store visited elements in a hash set.
-    
-    During scan, for every element e in the array, we check if val - e is present in the hash set 
-    i.e. val - e is already visited.
-    
-    If val - e is found in the hash set, it means there is a pair (e, val - e) in array 
-    whose sum is equal to the given val.
-    
-    If we have exhausted all elements in the array and didn’t find any such pair, 
-    the function will return false
-    """
+
     @staticmethod
     def find_sum_of_two(A, val):
+        """
+         Given an array of integers and a value, determine if there are any two integers
+         in the array whose sum is equal to the given value. Return true if the sum exists
+         and return false if it does not.
+
+         Scan the whole array once and store visited elements in a hash set.
+
+         During scan, for every element e in the array, we check if val - e is present in the hash set
+         i.e. val - e is already visited.
+
+         If val - e is found in the hash set, it means there is a pair (e, val - e) in array
+         whose sum is equal to the given val.
+
+         If we have exhausted all elements in the array and didn’t find any such pair,
+         the function will return false
+         """
         found_values = set()
         for a in A:
             if val - a in found_values:
@@ -338,3 +337,21 @@ class Solution:
             found_values.add(a)
 
         return False
+
+    #################################################################
+
+    @staticmethod
+    def two_sum(self, nums: List[int], target: int) -> List[int]:
+        """
+         Same task but in a given  array of integers nums and an integer target,
+         return indices of the two numbers such that they add up to target.
+
+         """
+        found = {}
+
+        for idx, value in enumerate(nums):
+            rest = target - nums[idx]
+            if rest in found:
+                return [idx, found[rest]]
+            else:
+                found[value] = idx

@@ -2,6 +2,8 @@
 This is LeetCode's official curated list of Top classic interview question
 
 """
+import copy
+
 
 
 class Solution:
@@ -26,3 +28,30 @@ class Solution:
                 if not second or second in dictionary or can_segment_string(second, dictionary):
                     return True
         return False
+
+
+    @staticmethod
+    def print_all_braces_rec(n, left_count, right_count, output, result):
+        """
+          Print all braces combinations for a given value n so that they are balanced.
+          For this solution, we will be using recursion.
+          """
+
+        if left_count >= n and right_count >= n:
+            result.append(copy.copy(output))
+
+            if left_count < n:
+                output += '{'
+                print_all_braces_rec(n, left_count + 1, right_count, output, result)
+                output.pop()
+
+            if right_count < left_count:
+                output += '}'
+                print_all_braces_rec(n, left_count, right_count + 1, output, result)
+                output.pop()
+
+    def print_all_braces(n):
+            output = []
+            result = []
+            print_all_braces_rec(n, 0, 0, output, result)
+            return result

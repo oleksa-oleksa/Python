@@ -355,3 +355,54 @@ class Solution:
                 return [idx, found[rest]]
             else:
                 found[value] = idx
+
+    #################################################################
+
+    @staticmethod
+    def is_valid_sudoku(board: List[List[str]]) -> bool:
+        """
+        Determine if a 9 x 9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules:
+
+        Each row must contain the digits 1-9 without repetition.
+        Each column must contain the digits 1-9 without repetition.
+        Each of the nine 3 x 3 sub-boxes of the grid must contain the digits 1-9 without repetition.
+        """
+
+        if not board:
+            return False
+        if len(board) != 9:
+            return False
+
+        # Validate Rule1: the Row
+
+        for i in board:
+            stack = []
+            for e in i:
+                if (e != ".") and (e in stack):
+                    return False
+                stack.append(e)
+
+        # Validate Rule 2: the Column
+        for j in range(9):
+            stack = []
+            for i in range(9):
+                if (board[i][j] != ".") and (board[i][j] in stack):
+                    return False
+                stack.append(board[i][j])
+
+        # Valiedate Rule 3: the subbox
+        for r in range(3):
+
+            for c in range(3):
+                stack = [
+                    *board[3 * r][3 * c:3 * c + 3],
+                    *board[3 * r + 1][3 * c:3 * c + 3],
+                    *board[3 * r + 2][3 * c:3 * c + 3]
+                ]
+                saw = []
+                for e in stack:
+                    if (e != ".") and (e in saw):
+                        return False
+                    saw.append(e)
+
+        return True

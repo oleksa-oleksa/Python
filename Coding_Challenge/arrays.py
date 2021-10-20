@@ -406,3 +406,28 @@ class Solution:
                     saw.append(e)
 
         return True
+
+    #################################################################
+
+    @staticmethod
+    def rotate(matrix: List[List[int]]) -> None:
+        """
+        You are given an n x n 2D matrix representing an image,
+        rotate the image by 90 degrees (clockwise).
+        """
+        if matrix is None:
+            return
+
+        # transpose
+        for i in range(0, len(matrix)):
+            for j in range(i, len(matrix[0])):
+                temp = matrix[i][j]
+                matrix[i][j] = matrix[j][i]
+                matrix[j][i] = temp
+        # reflect
+        for i in range(0, len(matrix)):
+            for j in range(0, len(matrix[0]) // 2):
+                reflection = len(matrix[0]) - j - 1
+                temp = matrix[i][j]
+                matrix[i][j] = matrix[i][reflection]
+                matrix[i][reflection] = temp

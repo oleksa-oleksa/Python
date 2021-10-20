@@ -68,3 +68,46 @@ class Solution:
         """
         stringlength=len(s)
         s[:stringlength:1] = s[stringlength::-1]
+
+    #################################################################
+
+    @staticmethod
+    def reverse(x: int) -> int:
+        """
+        Given a signed 32-bit integer x, return x with its digits reversed.
+        If reversing x causes the value to go outside
+        the signed 32-bit integer range [-2**31, 2**31 - 1], then return 0.
+        """
+        if x is None:
+            return
+
+        if x == 0:
+            return 0
+
+        if abs(x) >= 0x7FFFFFFF:
+            return 0
+
+        is_neg = False
+        reverse = 0
+
+        if x < 0:
+            is_neg = True
+            x = x * (-1)
+
+        string = str(x)
+        power = 10 ** (len(string) - 1)
+
+        while (x != 0):
+            rest = x % 10
+            x = x // 10
+            tmp = rest * power
+            reverse += tmp
+            power //= 10
+
+        if reverse >= 0x7FFFFFFF:
+            return 0
+
+        if is_neg:
+            reverse = reverse * (-1)
+
+        return reverse

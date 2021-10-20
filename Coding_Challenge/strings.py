@@ -3,7 +3,7 @@ This is LeetCode's official curated list of Top classic interview question
 
 """
 import copy
-
+from typing import List
 
 
 class Solution:
@@ -29,6 +29,7 @@ class Solution:
                     return True
         return False
 
+    #################################################################
 
     @staticmethod
     def print_all_braces_rec(n, left_count, right_count, output, result):
@@ -55,3 +56,15 @@ class Solution:
             result = []
             print_all_braces_rec(n, 0, 0, output, result)
             return result
+
+    #################################################################
+
+    @staticmethod
+    def reverseString(s: List[str]) -> None:
+        """
+        Write a function that reverses a string.
+        The input string is given as an array of characters s.
+        Do not return anything, modify s in-place instead.
+        """
+        stringlength=len(s)
+        s[:stringlength:1] = s[stringlength::-1]

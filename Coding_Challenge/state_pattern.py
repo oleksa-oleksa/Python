@@ -13,7 +13,7 @@ class Node:
 
     def __str__(self):
         if self.text:
-            return self.tag_name + ": " + self.text
+            return self.tag_name + ": " + self.text + " parent: " + self.parent.tag_name
         else:
             return self.tag_name
 

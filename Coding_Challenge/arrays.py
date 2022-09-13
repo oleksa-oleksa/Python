@@ -220,10 +220,44 @@ class Solution:
         return res
 
     #################################################################
+    @staticmethod
+    def plus_one_best(digits: List[int]) -> List[int]:
+        """ Better solution with carry-out - 52 ms
+         Given a non-empty array of decimal digits representing a non-negative integer,
+         increment one to the integer.
+
+         The digits are stored such that the most significant digit is at the head of the list,
+         and each element in the array contains a single digit.
+
+         You may assume the integer does not contain any leading zero, except the number 0 itself.
+         """
+        if not digits:
+            return
+
+        num = 0
+        power = 1
+
+        # obtain represented positive number from a list
+        for i in range(len(digits) - 1, -1, -1):
+            num += (digits[i] % 10) * power
+            power *= 10
+
+        # increment
+        num += 1
+
+        # convert back into list
+        digit_string = str(num)
+        # Convert each character of `digit_string` to an integer.
+        digit_map = map(int, digit_string)
+        # Convert `digit_map` to a list.
+        digit_list = list(digit_map)
+
+        return digit_list
 
     @staticmethod
     def plus_one(digits: List[int]) -> List[int]:
-        """Given a non-empty array of decimal digits representing a non-negative integer,
+        """ Not so ideal as previous but faster: 32 ms
+         Given a non-empty array of decimal digits representing a non-negative integer,
          increment one to the integer.
 
          The digits are stored such that the most significant digit is at the head of the list,

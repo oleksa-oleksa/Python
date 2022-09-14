@@ -1,0 +1,4 @@
+Machine_Learning/** linguist-vendored
+Machine_Learning/*/** linguist-vendored
+Machine_Learning/*.* linguist-vendored
+Machine_Learning/*/*.* linguist-vendored

@@ -3,7 +3,7 @@ Learning Python programming language
 This repository contains coding challenges and projects completed by the me, organized into subfolders.
 
 Subfolders
-# Coding_Challenge
+## Coding_Challenge
 Contains a solution to a binary search task from leetcode
 
 # Machine_Learning
